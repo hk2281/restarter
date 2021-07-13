@@ -1,0 +1,2 @@
+#!/bin/sh
+yarn pretty-quick --staged && yarn tsc && yarn eslint && yarn stylelint
