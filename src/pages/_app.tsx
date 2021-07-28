@@ -10,7 +10,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <SwitchTransition mode='out-in'>
       <CSSTransition key={router.pathname} classNames='page' timeout={300}>
-        <Component {...pageProps} />
+        <div className='wrapper'>
+          <Component {...pageProps} />
+        </div>
       </CSSTransition>
     </SwitchTransition>
   )

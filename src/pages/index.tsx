@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Home from '@/views/Home/Home'
+import { Home } from '@/screens/Home'
 
 const HomePage = () => {
   return (
