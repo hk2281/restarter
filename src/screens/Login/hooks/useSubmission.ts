@@ -1,20 +1,21 @@
-import { useCallback } from 'react'
+import { useCallback, useContext } from 'react'
 import { message } from 'antd'
-import { useAxios } from '@/api'
+import { api, updateTokens } from '@/api'
+import { AuthContext } from '@/authorization'
 
 export const useSubmission = () => {
-  const { axios, updateTokens } = useAxios()
-
+  const { setAuthorized } = useContext(AuthContext)
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        const { data } = await axios.post(`/auth/jwt/create/`, values)
+        const { data } = await api.post(`/auth/jwt/create/`, values)
+        setAuthorized(true)
         updateTokens(data)
       } catch (error) {
         message.error(error.response?.data?.detail || error.message)
       }
     },
-    [axios, updateTokens],
+    [setAuthorized],
   )
 
   return { handleSubmit }

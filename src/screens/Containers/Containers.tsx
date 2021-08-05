@@ -1,9 +1,8 @@
 import useSWR from 'swr'
-import { useAxios } from '@/api'
+import { api } from '@/api'
 
 export const Containers = () => {
-  const { axios } = useAxios()
-  const { data: containers } = useSWR(`/containers`, axios.get, {
+  const { data: containers } = useSWR(`/containers`, api.get, {
     revalidateOnFocus: false,
     shouldRetryOnError: false,
   })
