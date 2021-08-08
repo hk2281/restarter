@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Login } from '@/screens/Login'
-import { OneAuthorizationStateRoute } from '@/authorization'
+import { OneAuthorizationStateRoute } from '@/utils/authorization'
 
 const LoginPage = () => {
   return (

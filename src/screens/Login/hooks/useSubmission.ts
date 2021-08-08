@@ -1,7 +1,7 @@
 import { useCallback, useContext } from 'react'
 import { message } from 'antd'
 import { api, updateTokens } from '@/api'
-import { AuthContext } from '@/authorization'
+import { AuthContext } from '@/utils/authorization'
 
 export const useSubmission = () => {
   const { setAuthorized } = useContext(AuthContext)

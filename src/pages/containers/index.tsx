@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Containers } from '@/screens/Containers'
-import { OneAuthorizationStateRoute } from '@/authorization'
+import { OneAuthorizationStateRoute } from '@/utils/authorization'
 
 const ContainersPage = () => {
   return (

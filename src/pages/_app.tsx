@@ -1,16 +1,12 @@
 import 'antd/dist/antd.css'
-import 'src/styles/globals.scss'
 import type { AppProps } from 'next/app'
-import { useRouter } from 'next/router'
-import { CSSTransition, SwitchTransition } from 'react-transition-group'
 import { SWRConfig } from 'swr'
 import { AxiosRequestConfig } from 'axios'
-import { AuthContext, useAuthorization } from '@/authorization'
+import { AuthContext, useAuthorization } from '@/utils/authorization'
 import { api } from '@/api'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const authorization = useAuthorization()
-  const router = useRouter()
 
   return (
     <SWRConfig
@@ -20,13 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       }}
     >
       <AuthContext.Provider value={{ ...authorization }}>
-        <SwitchTransition mode='out-in'>
-          <CSSTransition key={router.pathname} classNames='page' timeout={300}>
-            <div className='wrapper'>
-              <Component {...pageProps} />
-            </div>
-          </CSSTransition>
-        </SwitchTransition>
+        <Component {...pageProps} />
       </AuthContext.Provider>
     </SWRConfig>
   )

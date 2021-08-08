@@ -1,7 +1,7 @@
 import { ReactNode, useContext, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { PATH } from '@/config'
-import { AuthContext } from '@/authorization'
+import { AuthContext } from '@/utils/authorization'
 
 interface Props {
   children: ReactNode
@@ -15,7 +15,7 @@ export const OneAuthorizationStateRoute = (props: Props) => {
 
   useEffect(() => {
     if (authorized !== context.authorized) {
-      router.push(authorized ? PATH.LOGIN : PATH.CONTAINERS).then()
+      router.replace(authorized ? PATH.LOGIN : PATH.CONTAINERS).then()
     }
   }, [authorized, context.authorized, router])
 
