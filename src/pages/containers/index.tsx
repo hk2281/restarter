@@ -1,15 +1,16 @@
 import Head from 'next/head'
 import { Containers } from '@/screens/Containers'
-import { useShowPageConditionally } from '@/authorization'
+import { OneAuthorizationStateRoute } from '@/authorization'
 
 const ContainersPage = () => {
-  const { shouldShow } = useShowPageConditionally({ authorized: true })
   return (
     <>
       <Head>
         <title>Containers page</title>
       </Head>
-      {shouldShow && <Containers />}
+      <OneAuthorizationStateRoute authorized={true}>
+        <Containers />
+      </OneAuthorizationStateRoute>
     </>
   )
 }

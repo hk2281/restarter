@@ -1,13 +1,15 @@
-import { useContext, useEffect } from 'react'
+import { ReactNode, useContext, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { PATH } from '@/config'
 import { AuthContext } from '@/authorization'
 
-interface Conditions {
+interface Props {
+  children: ReactNode
   authorized: boolean
 }
 
-export const useShowPageConditionally = ({ authorized }: Conditions) => {
+export const OneAuthorizationStateRoute = (props: Props) => {
+  const { children, authorized } = props
   const context = useContext(AuthContext)
   const router = useRouter()
 
@@ -17,7 +19,10 @@ export const useShowPageConditionally = ({ authorized }: Conditions) => {
     }
   }, [authorized, context.authorized, router])
 
-  return {
-    shouldShow: !context.loading && context.authorized === authorized,
-  }
+  return useMemo(
+    () => (
+      <>{!context.loading && context.authorized === authorized && children}</>
+    ),
+    [authorized, children, context.authorized, context.loading],
+  )
 }

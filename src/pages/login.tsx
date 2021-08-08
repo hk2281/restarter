@@ -1,15 +1,16 @@
 import Head from 'next/head'
 import { Login } from '@/screens/Login'
-import { useShowPageConditionally } from '@/authorization'
+import { OneAuthorizationStateRoute } from '@/authorization'
 
 const LoginPage = () => {
-  const { shouldShow } = useShowPageConditionally({ authorized: false })
   return (
     <>
       <Head>
         <title>Login page</title>
       </Head>
-      {shouldShow && <Login />}
+      <OneAuthorizationStateRoute authorized={false}>
+        <Login />
+      </OneAuthorizationStateRoute>
     </>
   )
 }
