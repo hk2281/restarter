@@ -32,7 +32,14 @@ export const Login = () => {
         <Form.Item name='password'>
           <Input.Password />
         </Form.Item>
-        <Button htmlType='submit'>Вход</Button>
+        <Form.Item>
+          <Button htmlType='submit'>Вход</Button>
+        </Form.Item>
+        <Form.Item>
+          <Link passHref href={PATH.SIGNUP}>
+            <Button htmlType='submit'>Регистрация</Button>
+          </Link>
+        </Form.Item>
       </Form>
     </>
   )
