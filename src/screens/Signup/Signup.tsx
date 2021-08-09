@@ -1,7 +1,5 @@
 import { Button, Form, Input, InputNumber, Select, Typography } from 'antd'
 import { PhoneOutlined, MailOutlined } from '@ant-design/icons'
-import Link from 'next/link'
-import { PATH } from '@/config'
 
 export const Signup = () => {
   return (
@@ -31,11 +29,6 @@ export const Signup = () => {
         </Form.Item>
         <Form.Item>
           <Button>Зарегистрироваться</Button>
-        </Form.Item>
-        <Form.Item>
-          <Link passHref href={PATH.LOGIN}>
-            <Button type='link'>Войти</Button>
-          </Link>
         </Form.Item>
       </Form>
     </>

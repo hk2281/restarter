@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { Signup } from '@/screens/Signup'
 import { OneAuthorizationStateRoute } from '@/utils/authorization'
+import { UnauthorizedLayout } from '@/shared/UnauthorizedLayout'
 
 const SignupPage = () => {
   return (
@@ -15,4 +16,5 @@ const SignupPage = () => {
   )
 }
 
+SignupPage.layout = UnauthorizedLayout
 export default SignupPage

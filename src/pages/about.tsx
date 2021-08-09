@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { About } from '@/screens/About'
+import { UnauthorizedLayout } from '@/shared/UnauthorizedLayout'
 
 const AboutPage = () => {
   return (
@@ -12,4 +13,5 @@ const AboutPage = () => {
   )
 }
 
+AboutPage.layout = UnauthorizedLayout
 export default AboutPage

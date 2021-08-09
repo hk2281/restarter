@@ -1,0 +1,40 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.content {
+  padding: 24px;
+}
+
+.drawer {
+  :global(.ant-drawer-header) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    border-bottom: none;
+  }
+
+  :global(.ant-drawer-close) {
+    position: static;
+    padding: 0;
+  }
+
+  :global(.ant-drawer-title) {
+    font-size: 20px;
+    line-height: 32px;
+  }
+
+  :global(.ant-drawer-body) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.tabs {
+  margin: auto 0;
+}

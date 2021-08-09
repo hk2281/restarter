@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { Login } from '@/screens/Login'
 import { OneAuthorizationStateRoute } from '@/utils/authorization'
+import { UnauthorizedLayout } from '@/shared/UnauthorizedLayout'
 
 const LoginPage = () => {
   return (
@@ -15,4 +16,5 @@ const LoginPage = () => {
   )
 }
 
+LoginPage.layout = UnauthorizedLayout
 export default LoginPage

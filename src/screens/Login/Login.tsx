@@ -10,21 +10,6 @@ export const Login = () => {
   return (
     <>
       <Typography.Title>Вход</Typography.Title>
-      <Typography.Paragraph>
-        <Link passHref href={PATH.HOME}>
-          <Typography.Link>Главная</Typography.Link>
-        </Link>
-      </Typography.Paragraph>
-      <Typography.Paragraph>
-        <Link passHref href={PATH.RULES}>
-          <Typography.Link>Правила</Typography.Link>
-        </Link>
-      </Typography.Paragraph>
-      <Typography.Paragraph>
-        <Link passHref href={PATH.ABOUT}>
-          <Typography.Link>О нас</Typography.Link>
-        </Link>
-      </Typography.Paragraph>
       <Form onFinish={handleSubmit}>
         <Form.Item name='email'>
           <Input style={{ color: `#00000073` }} suffix={<UserOutlined />} />
