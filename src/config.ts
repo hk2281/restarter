@@ -1,5 +1,7 @@
 export const PATH = {
   HOME: `/`,
+  FILL: `/fill`,
+  FILL_CONTAINER: `/fill/[container]`,
   LOGIN: `/login`,
   SIGNUP: `/signup`,
   RULES: `/rules`,
