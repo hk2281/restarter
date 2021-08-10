@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Typography } from 'antd'
 import { useRouter } from 'next/router'
 import { tabs } from '@/shared/UnauthorizedLayout/TabsList/tabs'
+import styles from 'src/shared/UnauthorizedLayout/TabsList/TabsList.module.scss'
 
 interface Props {
   onClick: () => void
@@ -16,13 +17,16 @@ export const TabsList = (props: Props) => {
     <>
       {tabs.map(({ path, title }) => (
         <Link key={path} passHref href={path}>
-          <Typography.Title
-            level={2}
-            type={router.pathname === path ? `success` : undefined}
-            onClick={onClick}
-          >
-            {title}
-          </Typography.Title>
+          <a>
+            <Typography.Title
+              className={styles.text}
+              level={2}
+              type={router.pathname === path ? `success` : undefined}
+              onClick={onClick}
+            >
+              {title}
+            </Typography.Title>
+          </a>
         </Link>
       ))}
     </>
