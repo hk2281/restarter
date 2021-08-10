@@ -1,10 +1,24 @@
 import { Button, Form, Input, InputNumber, Select, Typography } from 'antd'
 import { PhoneOutlined, MailOutlined } from '@ant-design/icons'
+import { useMemo } from 'react'
+import useSWR from 'swr'
 import { OneAuthorizationStateRoute } from '@/utils/authorization'
 import { UnauthorizedLayout } from '@/shared/UnauthorizedLayout'
+import { Building } from '@/screens/Signup/types/building'
 import styles from 'src/screens/Signup/Signup.module.scss'
 
 export const Signup = () => {
+  const { data: buildings } = useSWR<Building[]>(`/buildings`)
+
+  const buildingsOptions = useMemo(
+    () =>
+      buildings?.map((building) => ({
+        label: building.address,
+        value: building.id,
+      })),
+    [buildings],
+  )
+
   return (
     <OneAuthorizationStateRoute authorized={false}>
       <Typography.Title>Регистрация</Typography.Title>
@@ -27,7 +41,11 @@ export const Signup = () => {
           />
         </Form.Item>
         <Form.Item>
-          <Select placeholder='Корпус' size='large' />
+          <Select
+            options={buildingsOptions}
+            placeholder='Корпус'
+            size='large'
+          />
         </Form.Item>
         <div className={styles.formItemsPair}>
           <Form.Item
