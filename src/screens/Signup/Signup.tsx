@@ -5,6 +5,7 @@ import useSWR from 'swr'
 import { OneAuthorizationStateRoute } from '@/utils/authorization'
 import { UnauthorizedLayout } from '@/shared/UnauthorizedLayout'
 import { Building } from '@/screens/Signup/types/building'
+import { containerTypes } from '@/config'
 import styles from 'src/screens/Signup/Signup.module.scss'
 
 export const Signup = () => {
@@ -59,7 +60,11 @@ export const Signup = () => {
           </Form.Item>
         </div>
         <Form.Item>
-          <Select placeholder='Объем контейнера' size='large' />
+          <Select
+            options={containerTypes}
+            placeholder='Объем контейнера'
+            size='large'
+          />
         </Form.Item>
         <Form.Item>
           <Input.TextArea placeholder='Комментарий' size='large' />
