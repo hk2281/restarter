@@ -2,35 +2,54 @@ import { Button, Form, Input, InputNumber, Select, Typography } from 'antd'
 import { PhoneOutlined, MailOutlined } from '@ant-design/icons'
 import { OneAuthorizationStateRoute } from '@/utils/authorization'
 import { UnauthorizedLayout } from '@/shared/UnauthorizedLayout'
+import styles from 'src/screens/Signup/Signup.module.scss'
 
 export const Signup = () => {
   return (
     <OneAuthorizationStateRoute authorized={false}>
       <Typography.Title>Регистрация</Typography.Title>
-      <Form>
-        <Form.Item label='Почта'>
-          <Input prefix={<MailOutlined />} />
-        </Form.Item>
-        <Form.Item label='Телефон'>
-          <Input prefix={<PhoneOutlined />} />
-        </Form.Item>
-        <Form.Item label='Корпус'>
-          <Select />
-        </Form.Item>
-        <Form.Item label='Этаж'>
-          <InputNumber />
-        </Form.Item>
-        <Form.Item label='Аудитория'>
-          <Input />
-        </Form.Item>
-        <Form.Item label='Объем контейнера'>
-          <Select />
-        </Form.Item>
-        <Form.Item label='Комментарий'>
-          <Input.TextArea />
+      <Typography.Paragraph>
+        Начните ответственный подход к макулатуре с рассказа о себе
+      </Typography.Paragraph>
+      <Form name='kek' onFinish={() => null}>
+        <Form.Item>
+          <Input
+            placeholder='mail@support.ru'
+            size='large'
+            suffix={<MailOutlined />}
+          />
         </Form.Item>
         <Form.Item>
-          <Button>Зарегистрироваться</Button>
+          <Input
+            placeholder='89123456789'
+            size='large'
+            suffix={<PhoneOutlined />}
+          />
+        </Form.Item>
+        <Form.Item>
+          <Select placeholder='Корпус' size='large' />
+        </Form.Item>
+        <div className={styles.formItemsPair}>
+          <Form.Item
+            name='floor'
+            rules={[{ required: true, message: `Введите этаж` }]}
+          >
+            <InputNumber placeholder='Этаж' size='large' />
+          </Form.Item>
+          <Form.Item>
+            <Input placeholder='Аудитория' size='large' />
+          </Form.Item>
+        </div>
+        <Form.Item>
+          <Select placeholder='Объем контейнера' size='large' />
+        </Form.Item>
+        <Form.Item>
+          <Input.TextArea placeholder='Комментарий' size='large' />
+        </Form.Item>
+        <Form.Item>
+          <Button block htmlType='submit' size='large' type='primary'>
+            Зарегистрироваться
+          </Button>
         </Form.Item>
       </Form>
     </OneAuthorizationStateRoute>
