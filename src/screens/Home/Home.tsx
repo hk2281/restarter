@@ -1,4 +1,5 @@
 import { Typography } from 'antd'
+import { UnauthorizedLayout } from '@/shared/UnauthorizedLayout'
 
 export const Home = () => {
   return (
@@ -7,3 +8,6 @@ export const Home = () => {
     </>
   )
 }
+
+Home.title = `Recycling Starter`
+Home.layout = UnauthorizedLayout

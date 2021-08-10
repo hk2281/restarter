@@ -18,3 +18,5 @@ export const NotFound = () => {
     </>
   )
 }
+
+NotFound.title = `Страница не найдена`

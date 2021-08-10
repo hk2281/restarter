@@ -1,4 +1,5 @@
 import { Typography } from 'antd'
+import { UnauthorizedLayout } from '@/shared/UnauthorizedLayout'
 
 export const Rules = () => {
   return (
@@ -7,3 +8,6 @@ export const Rules = () => {
     </>
   )
 }
+
+Rules.title = `Правила сбора`
+Rules.layout = UnauthorizedLayout

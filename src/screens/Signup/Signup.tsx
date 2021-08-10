@@ -1,9 +1,11 @@
 import { Button, Form, Input, InputNumber, Select, Typography } from 'antd'
 import { PhoneOutlined, MailOutlined } from '@ant-design/icons'
+import { OneAuthorizationStateRoute } from '@/utils/authorization'
+import { UnauthorizedLayout } from '@/shared/UnauthorizedLayout'
 
 export const Signup = () => {
   return (
-    <>
+    <OneAuthorizationStateRoute authorized={false}>
       <Typography.Title>Регистрация</Typography.Title>
       <Form>
         <Form.Item label='Почта'>
@@ -31,6 +33,9 @@ export const Signup = () => {
           <Button>Зарегистрироваться</Button>
         </Form.Item>
       </Form>
-    </>
+    </OneAuthorizationStateRoute>
   )
 }
+
+Signup.title = `Регистрация`
+Signup.layout = UnauthorizedLayout

@@ -3,12 +3,14 @@ import Link from 'next/link'
 import { UserOutlined } from '@ant-design/icons'
 import { PATH } from '@/config'
 import { useSubmission } from '@/screens/Login/hooks/useSubmission'
+import { OneAuthorizationStateRoute } from '@/utils/authorization'
+import { UnauthorizedLayout } from '@/shared/UnauthorizedLayout'
 
 export const Login = () => {
   const { handleSubmit } = useSubmission()
 
   return (
-    <>
+    <OneAuthorizationStateRoute authorized={false}>
       <Typography.Title>Вход</Typography.Title>
       <Form onFinish={handleSubmit}>
         <Form.Item name='email'>
@@ -26,6 +28,9 @@ export const Login = () => {
           </Link>
         </Form.Item>
       </Form>
-    </>
+    </OneAuthorizationStateRoute>
   )
 }
+
+Login.title = `Вход`
+Login.layout = UnauthorizedLayout
