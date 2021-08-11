@@ -1,6 +1,6 @@
 import { Typography } from 'antd'
 import Head from 'next/head'
-import { UnauthorizedLayout } from '@/shared/UnauthorizedLayout'
+import { UnauthorizedLayout } from '@/shared/components/UnauthorizedLayout'
 
 export const Rules = () => {
   return (

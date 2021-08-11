@@ -1,7 +1,7 @@
 import { Button, Typography } from 'antd'
 import Link from 'next/link'
 import Head from 'next/head'
-import { UnauthorizedLayout } from '@/shared/UnauthorizedLayout'
+import { UnauthorizedLayout } from '@/shared/components/UnauthorizedLayout'
 import { PATH } from '@/config'
 
 export const Home = () => {

@@ -2,7 +2,7 @@ import { ReactNode, useCallback, useMemo, useState } from 'react'
 import { Drawer, PageHeader, Typography } from 'antd'
 import { MenuOutlined } from '@ant-design/icons'
 import styles from './UnauthorizedLayout.module.scss'
-import { TabsList } from '@/shared/UnauthorizedLayout/TabsList/TabsList'
+import { TabsList } from '@/shared/components/UnauthorizedLayout/TabsList/TabsList'
 
 interface Props {
   children: ReactNode

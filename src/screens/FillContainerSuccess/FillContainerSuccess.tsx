@@ -2,7 +2,7 @@ import { Button, Result, Typography } from 'antd'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-import { UnauthorizedLayout } from '@/shared/UnauthorizedLayout'
+import { UnauthorizedLayout } from '@/shared/components/UnauthorizedLayout'
 import { PATH } from '@/config'
 
 export const FillContainerSuccess = () => {

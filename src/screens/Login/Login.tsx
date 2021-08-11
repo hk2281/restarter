@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { UserOutlined } from '@ant-design/icons'
 import { useSubmission } from '@/screens/Login/hooks/useSubmission'
 import { OneAuthorizationStateRoute } from '@/utils/authorization'
-import { UnauthorizedLayout } from '@/shared/UnauthorizedLayout'
+import { UnauthorizedLayout } from '@/shared/components/UnauthorizedLayout'
 
 export const Login = () => {
   const { handleSubmit } = useSubmission()

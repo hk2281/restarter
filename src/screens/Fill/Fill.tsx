@@ -2,7 +2,7 @@ import { Button, Form, Input, Typography } from 'antd'
 import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-import { UnauthorizedLayout } from '@/shared/UnauthorizedLayout'
+import { UnauthorizedLayout } from '@/shared/components/UnauthorizedLayout'
 import { useContainer } from '@/shared/hooks'
 import { PATH } from '@/config'
 

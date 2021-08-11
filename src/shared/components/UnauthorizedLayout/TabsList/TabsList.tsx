@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { Typography } from 'antd'
 import { useRouter } from 'next/router'
-import { tabs } from '@/shared/UnauthorizedLayout/TabsList/tabs'
-import styles from 'src/shared/UnauthorizedLayout/TabsList/TabsList.module.scss'
+import { tabs } from '@/shared/components/UnauthorizedLayout/TabsList/tabs'
+import styles from '@/shared/components/UnauthorizedLayout/TabsList/TabsList.module.scss'
 
 interface Props {
   onClick: () => void
