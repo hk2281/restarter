@@ -1,10 +1,14 @@
 import { Result, Button } from 'antd'
+import Head from 'next/head'
 import Link from 'next/link'
 import { PATH } from '@/config'
 
 export const NotFound = () => {
   return (
     <>
+      <Head>
+        <title>Страница не найдена</title>
+      </Head>
       <Result
         extra={
           <Link passHref href={PATH.HOME}>
@@ -18,5 +22,3 @@ export const NotFound = () => {
     </>
   )
 }
-
-NotFound.title = `Страница не найдена`

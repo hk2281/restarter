@@ -1,6 +1,7 @@
 import { Button, Form, Input, Typography } from 'antd'
 import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 import { UnauthorizedLayout } from '@/shared/UnauthorizedLayout'
 import { useContainer } from '@/shared/hooks'
 import { PATH } from '@/config'
@@ -27,6 +28,9 @@ export const Fill = () => {
 
   return (
     <>
+      <Head>
+        <title>Заполнить контейнер</title>
+      </Head>
       <Typography.Paragraph>
         Введите идентификационный номер вашего контейнера
       </Typography.Paragraph>
@@ -44,5 +48,4 @@ export const Fill = () => {
   )
 }
 
-Fill.title = `Заполнить контейнер`
 Fill.layout = UnauthorizedLayout

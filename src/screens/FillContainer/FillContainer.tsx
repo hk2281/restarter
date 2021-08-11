@@ -1,8 +1,15 @@
+import Head from 'next/head'
 import { UnauthorizedLayout } from '@/shared/UnauthorizedLayout'
 
 export const FillContainer = () => {
-  return <>asjkldnaskjd</>
+  return (
+    <>
+      <Head>
+        <title>Заполнить контейнер</title>
+      </Head>
+      asdasdasd
+    </>
+  )
 }
 
-FillContainer.title = `Заполнить контейнер`
 FillContainer.layout = UnauthorizedLayout

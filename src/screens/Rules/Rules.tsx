@@ -1,13 +1,16 @@
 import { Typography } from 'antd'
+import Head from 'next/head'
 import { UnauthorizedLayout } from '@/shared/UnauthorizedLayout'
 
 export const Rules = () => {
   return (
     <>
+      <Head>
+        <title>Правила сбора</title>
+      </Head>
       <Typography.Title>Правила сбора</Typography.Title>
     </>
   )
 }
 
-Rules.title = `Правила сбора`
 Rules.layout = UnauthorizedLayout

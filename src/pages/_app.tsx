@@ -2,12 +2,11 @@ import 'antd/dist/antd.css'
 import { SWRConfig } from 'swr'
 import { AxiosRequestConfig } from 'axios'
 import { ComponentType, ReactNode, useMemo } from 'react'
-import Head from 'next/head'
 import { AuthContext, useAuthorization } from '@/utils/authorization'
 import { api } from '@/api'
 
 interface AppProps {
-  Component: ComponentType & { layout?: ComponentType; title: string }
+  Component: ComponentType & { layout?: ComponentType }
   pageProps: Record<string, unknown>
 }
 
@@ -28,9 +27,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       }}
     >
       <AuthContext.Provider value={{ ...authorization }}>
-        <Head>
-          <title>{Component.title}</title>
-        </Head>
         <Layout>
           <Component {...pageProps} />
         </Layout>
