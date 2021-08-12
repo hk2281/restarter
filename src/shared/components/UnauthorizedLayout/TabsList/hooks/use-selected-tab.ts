@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router'
 import { useMemo } from 'react'
-import { tabs } from '@/shared/components/UnauthorizedLayout/TabsList/tabs'
 import { PATH } from '@/config'
+import { useTabs } from '@/shared/components/UnauthorizedLayout/TabsList/hooks/use-tabs'
 
 export const useSelectedTab = () => {
   const router = useRouter()
+  const { tabs } = useTabs()
 
   return useMemo(
     () => ({
@@ -14,6 +15,6 @@ export const useSelectedTab = () => {
           .find((tab) => router.pathname.startsWith(tab.path))?.path ||
         PATH.HOME,
     }),
-    [router.pathname],
+    [router.pathname, tabs],
   )
 }

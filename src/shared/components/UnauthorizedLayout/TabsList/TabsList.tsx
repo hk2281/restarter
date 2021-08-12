@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import { Typography } from 'antd'
 import { useMemo } from 'react'
-import { tabs } from '@/shared/components/UnauthorizedLayout/TabsList/tabs'
 import styles from '@/shared/components/UnauthorizedLayout/TabsList/TabsList.module.scss'
 import { useSelectedTab } from '@/shared/components/UnauthorizedLayout/TabsList/hooks/use-selected-tab'
+import { useTabs } from '@/shared/components/UnauthorizedLayout/TabsList/hooks/use-tabs'
 
 interface Props {
   onClick: () => void
@@ -12,6 +12,7 @@ interface Props {
 export const TabsList = (props: Props) => {
   const { onClick } = props
   const { tab } = useSelectedTab()
+  const { tabs } = useTabs()
 
   return useMemo(
     () => (
@@ -32,6 +33,6 @@ export const TabsList = (props: Props) => {
         ))}
       </>
     ),
-    [onClick, tab],
+    [onClick, tab, tabs],
   )
 }
