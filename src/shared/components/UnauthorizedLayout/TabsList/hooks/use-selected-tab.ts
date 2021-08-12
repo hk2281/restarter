@@ -11,7 +11,8 @@ export const useSelectedTab = () => {
       tab:
         tabs
           .filter((tab) => tab.path !== PATH.HOME)
-          .find((tab) => router.pathname.includes(tab.path))?.path || PATH.HOME,
+          .find((tab) => router.pathname.startsWith(tab.path))?.path ||
+        PATH.HOME,
     }),
     [router.pathname],
   )

@@ -1,13 +1,12 @@
-import { Button, Card, Typography } from 'antd'
+import { Card, Typography } from 'antd'
 import useSWR from 'swr'
 import Head from 'next/head'
 import { Container } from '@/screens/Containers/types/container'
-import { useHandleLogout } from '@/screens/Containers/hooks/useHandleLogout'
 import { OneAuthorizationStateRoute } from '@/utils/authorization'
+import { AuthorizedLayout } from '@/shared/components/AuthorizedLayout'
 
 export const Containers = () => {
   const { data: containers } = useSWR<Container[]>(`/containers`)
-  const { handleLogout } = useHandleLogout()
 
   return (
     <>
@@ -22,10 +21,9 @@ export const Containers = () => {
             </Typography.Paragraph>
           </Card>
         ))}
-        <Button danger onClick={handleLogout}>
-          Logout
-        </Button>
       </OneAuthorizationStateRoute>
     </>
   )
 }
+
+Containers.layout = AuthorizedLayout

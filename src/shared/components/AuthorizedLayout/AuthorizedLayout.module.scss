@@ -1,0 +1,20 @@
+.wrapper {
+  display: flex;
+  width: 864px;
+  height: calc(100vh - 73px);
+  margin: auto;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: 73px;
+  padding: 16px max(calc(50% - 432px), 24px);
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.content {
+  width: 648px;
+  padding: 24px;
+}

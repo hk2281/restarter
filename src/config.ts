@@ -8,6 +8,7 @@ export const PATH = {
   RULES: `/rules`,
   ABOUT: `/about`,
   CONTAINERS: `/containers`,
+  ECO_DEPARTMENT: `/eco`,
 }
 
 export const containerStatuses = [

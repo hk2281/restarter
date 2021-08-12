@@ -1,0 +1,22 @@
+.menu {
+  padding: 20px 0;
+}
+
+.link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0 16px 0 24px;
+}
+
+.menuItem {
+  padding: 0 !important;
+}
+
+.menuItemDanger {
+  composes: menuItem;
+
+  .link {
+    color: #ff4d4f !important;
+  }
+}
