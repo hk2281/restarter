@@ -1,25 +1,34 @@
-import { Card, Typography } from 'antd'
-import useSWR from 'swr'
+import { Button, Form, Table } from 'antd'
 import Head from 'next/head'
-import { Container } from '@/screens/Containers/types/container'
 import { AuthorizedLayout } from '@/shared/components/AuthorizedLayout'
+import { useTableColumns } from '@/screens/Containers/hooks/useTableColumns'
+import { useTableRowSelection } from '@/screens/Containers/hooks/useTableRowSelection'
+import { useTableData } from '@/screens/Containers/hooks/useTableData'
 
 export const Containers = () => {
-  const { data: containers } = useSWR<Container[]>(`/containers`)
+  const { data } = useTableData()
+  const { columns } = useTableColumns()
+  const { rowSelection, selectedRows } = useTableRowSelection()
 
   return (
-    <>
+    <Form>
       <Head>
         <title>Контейнеры</title>
       </Head>
-      {containers?.map((container) => (
-        <Card key={container.id} title={container.location}>
-          <Typography.Paragraph>
-            {container.status} {container.kind}
-          </Typography.Paragraph>
-        </Card>
-      ))}
-    </>
+      <Form.Item>
+        <Button disabled={!selectedRows?.length} size='large' type='primary'>
+          Организовать сбор
+        </Button>
+      </Form.Item>
+      <Form.Item>
+        <Table
+          columns={columns}
+          dataSource={data}
+          pagination={false}
+          rowSelection={rowSelection}
+        />
+      </Form.Item>
+    </Form>
   )
 }
 

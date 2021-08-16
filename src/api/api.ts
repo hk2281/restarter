@@ -22,10 +22,7 @@ const createResponseInterceptor = () => {
   const interceptor = api.interceptors.response.use(
     undefined,
     async (error) => {
-      if (
-        error.response.status !== 401 ||
-        error.response.config.url !== `/auth/jwt/refresh/`
-      ) {
+      if (error.response.status !== 401) {
         return Promise.reject(error)
       }
       api.interceptors.response.eject(interceptor)
@@ -35,6 +32,7 @@ const createResponseInterceptor = () => {
           refresh: localStorage.getItem(`refresh`),
         })
         updateTokens(data)
+        error.response.config.headers[`Authorization`] = `Bearer ${data.access}`
         return await api(error.response.config)
       } catch (error) {
         clearTokens()
