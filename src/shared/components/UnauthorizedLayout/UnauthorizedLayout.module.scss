@@ -2,6 +2,8 @@
   position: sticky;
   top: 0;
   z-index: 1;
+  height: 73px;
+  padding: 16px max(calc(50% - 432px), 24px);
   background: #fff;
   border-bottom: 1px solid #f0f0f0;
 }
@@ -39,4 +41,11 @@
   display: grid;
   grid-gap: 36px;
   margin: auto 0;
+}
+
+@media (min-width: 1024px) {
+  .content {
+    width: 400px;
+    margin: 0 auto;
+  }
 }

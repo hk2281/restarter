@@ -6,7 +6,7 @@ import { useSelectedTab } from '@/shared/components/UnauthorizedLayout/TabsList/
 import { useTabs } from '@/shared/components/UnauthorizedLayout/TabsList/hooks/use-tabs'
 
 interface Props {
-  onClick: () => void
+  onClick?: () => void
 }
 
 export const TabsList = (props: Props) => {
