@@ -35,15 +35,15 @@ export const Signup = () => {
           <Form.Item>
             <Input
               placeholder='mail@support.ru'
+              prefix={<MailOutlined />}
               size='large'
-              suffix={<MailOutlined />}
             />
           </Form.Item>
           <Form.Item>
             <Input
               placeholder='89123456789'
+              prefix={<PhoneOutlined />}
               size='large'
-              suffix={<PhoneOutlined />}
             />
           </Form.Item>
           <Form.Item>
