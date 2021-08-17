@@ -1,14 +1,20 @@
 import { Button, Form, Table } from 'antd'
 import Head from 'next/head'
+import { useCallback, useState } from 'react'
 import { AuthorizedLayout } from '@/shared/components/AuthorizedLayout'
 import { useTableColumns } from '@/screens/Containers/hooks/useTableColumns'
 import { useTableRowSelection } from '@/screens/Containers/hooks/useTableRowSelection'
 import { useTableData } from '@/screens/Containers/hooks/useTableData'
+import { Edit } from '@/screens/Containers/Edit/Edit'
 
 export const Containers = () => {
-  const { data } = useTableData()
-  const { columns } = useTableColumns()
+  const [editingId, setEditingId] = useState<number>()
+
+  const { data, isValidating } = useTableData()
+  const { columns } = useTableColumns({ setEditingId })
   const { rowSelection, selectedRows } = useTableRowSelection()
+
+  const handleClose = useCallback(() => setEditingId(undefined), [])
 
   return (
     <Form>
@@ -24,10 +30,12 @@ export const Containers = () => {
         <Table
           columns={columns}
           dataSource={data}
+          loading={isValidating}
           pagination={false}
           rowSelection={rowSelection}
         />
       </Form.Item>
+      <Edit id={editingId} onClose={handleClose} />
     </Form>
   )
 }

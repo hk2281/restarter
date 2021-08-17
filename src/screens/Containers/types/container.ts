@@ -1,7 +1,10 @@
 export interface Container {
   avg_fill_time: string
   avg_takeout_wait_time: string
-  building: string
+  building: {
+    id: number
+    address: string
+  }
   building_part?: null
   created_at: string
   cur_fill_time: string

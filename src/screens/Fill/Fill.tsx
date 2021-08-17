@@ -9,7 +9,7 @@ import { PATH } from '@/config'
 export const Fill = () => {
   const router = useRouter()
   const [id, setId] = useState<number>()
-  const { container } = useContainer({ id })
+  const { data: container } = useContainer({ id })
 
   const handleFinish = useCallback(({ id }: { id: string }) => {
     setId(parseInt(id))

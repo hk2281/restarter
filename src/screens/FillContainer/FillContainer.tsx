@@ -13,7 +13,7 @@ export const FillContainer = () => {
     () => parseInt(router.query.container as string),
     [router.query.container],
   )
-  const { container } = useContainer({ id })
+  const { data: container } = useContainer({ id })
   const { fillContainer } = useFillContainer({ id })
 
   const handleFillContainer = useCallback(async () => {

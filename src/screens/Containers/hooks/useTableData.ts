@@ -3,12 +3,16 @@ import useSWR from 'swr'
 import { Container } from '@/screens/Containers/types/container'
 
 export const useTableData = () => {
-  const { data: containers } = useSWR<Container[]>(`/containers`)
+  const swrResponse = useSWR<Container[]>(`/containers`)
 
   const data = useMemo(
-    () => containers?.map((container) => ({ ...container, key: container.id })),
-    [containers],
+    () =>
+      swrResponse.data?.map((container) => ({
+        ...container,
+        key: container.id,
+      })),
+    [swrResponse.data],
   )
 
-  return { data }
+  return { ...swrResponse, data }
 }
