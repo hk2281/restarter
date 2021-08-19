@@ -5,6 +5,7 @@ export const PATH = {
   FILL_CONTAINER_SUCCESS: `/fill/[container]/success`,
   LOGIN: `/login`,
   SIGNUP: `/signup`,
+  SIGNUP_SUCCESS: `/signup/success`,
   RULES: `/rules`,
   ABOUT: `/about`,
   CONTAINERS: `/containers`,

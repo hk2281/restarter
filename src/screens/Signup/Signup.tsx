@@ -6,9 +6,11 @@ import { UnauthorizedLayout } from '@/shared/components/UnauthorizedLayout'
 import { containerTypes } from '@/config'
 import styles from 'src/screens/Signup/Signup.module.scss'
 import { useBuildings } from '@/shared/hooks/use-buildings'
+import { useHandleSignup } from '@/screens/Signup/hooks/useHandleSignup'
 
 export const Signup = () => {
   const { buildings } = useBuildings()
+  const { handleSignup } = useHandleSignup()
 
   return (
     <>
@@ -20,8 +22,8 @@ export const Signup = () => {
         <Typography.Paragraph>
           Начните ответственный подход к макулатуре с рассказа о себе
         </Typography.Paragraph>
-        <Form name='kek' onFinish={() => null}>
-          <Form.Item>
+        <Form onFinish={handleSignup}>
+          <Form.Item name='email'>
             <Input
               placeholder='mail@support.ru'
               prefix={<MailOutlined />}
@@ -34,6 +36,28 @@ export const Signup = () => {
               prefix={<PhoneOutlined />}
               size='large'
             />
+          </Form.Item>
+          <Form.Item name='password'>
+            <Input.Password />
+          </Form.Item>
+          <Form.Item
+            hasFeedback
+            dependencies={[`password`]}
+            name='confirm'
+            rules={[
+              {
+                required: true,
+                message: `Подтвердите пароль`,
+              },
+              ({ getFieldValue }) => ({
+                validator: (_, value) =>
+                  !value || getFieldValue(`password`) === value
+                    ? Promise.resolve()
+                    : Promise.reject(new Error(`Пароли не совпадают`)),
+              }),
+            ]}
+          >
+            <Input.Password />
           </Form.Item>
           <Form.Item>
             <Select options={buildings} placeholder='Корпус' size='large' />

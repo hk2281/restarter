@@ -12,7 +12,9 @@ export const NotFound = () => {
       <Result
         extra={
           <Link passHref href={PATH.HOME}>
-            <Button type='primary'>На главную</Button>
+            <Button size='large' type='primary'>
+              На главную
+            </Button>
           </Link>
         }
         status='404'
