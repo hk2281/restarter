@@ -19,7 +19,7 @@ export const Navigation = () => {
     >
       {tabs.map((tab) => (
         <Menu.Item key={tab.path} className={styles.menuItem}>
-          <Link href={PATH.ECO_DEPARTMENT}>
+          <Link href={tab.path}>
             <a className={styles.link}>{tab.title}</a>
           </Link>
         </Menu.Item>

@@ -14,10 +14,10 @@ export const OneAuthorizationStateRoute = (props: Props) => {
   const router = useRouter()
 
   useEffect(() => {
-    if (authorized !== context.authorized) {
+    if (!context.loading && authorized !== context.authorized) {
       router.replace(authorized ? PATH.LOGIN : PATH.CONTAINERS).then()
     }
-  }, [authorized, context.authorized, router])
+  }, [authorized, context.authorized, context.loading, router])
 
   return useMemo(
     () => (

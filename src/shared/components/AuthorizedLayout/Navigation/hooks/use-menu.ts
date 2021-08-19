@@ -15,12 +15,11 @@ export const useMenu = () => {
     async ({ key }: Params) => {
       if (key !== `logout`) {
         setSelectedKey(key)
-        await router.push(key)
       } else {
         await handleLogout()
       }
     },
-    [handleLogout, router],
+    [handleLogout],
   )
 
   useEffect(() => {
