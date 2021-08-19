@@ -14,7 +14,7 @@ export const Edit = ({ id, onClose }: Props) => {
   const [form] = Form.useForm()
   const { data: container, isValidating } = useContainer({ id })
   const { buildings } = useBuildings()
-  const { handleSubmit } = useHandleSubmit({ id })
+  const { handleSubmit } = useHandleSubmit({ id, onClose })
 
   useEffect(() => {
     if (container) {
@@ -33,7 +33,7 @@ export const Edit = ({ id, onClose }: Props) => {
       visible={!!id}
       onCancel={onClose}
     >
-      <Form form={form} initialValues={container} onFinish={handleSubmit}>
+      <Form form={form} onFinish={handleSubmit}>
         <Form.Item label='Расположение' name='location'>
           <Input disabled={isValidating} size='large' />
         </Form.Item>

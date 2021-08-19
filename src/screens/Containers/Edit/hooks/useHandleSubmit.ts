@@ -4,9 +4,10 @@ import { api } from '@/api'
 
 interface Params {
   id?: number
+  onClose: () => void
 }
 
-export const useHandleSubmit = ({ id }: Params) => {
+export const useHandleSubmit = ({ id, onClose }: Params) => {
   const handleSubmit = useCallback(
     async (values: unknown) => {
       if (!id) {
@@ -14,8 +15,9 @@ export const useHandleSubmit = ({ id }: Params) => {
       }
       await api.patch(`/containers/${id}`, values)
       await mutate(`/containers`)
+      onClose()
     },
-    [id],
+    [id, onClose],
   )
 
   return { handleSubmit }
