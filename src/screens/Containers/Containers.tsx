@@ -8,12 +8,14 @@ import { useTableData } from '@/screens/Containers/hooks/useTableData'
 import { Edit } from '@/screens/Containers/Edit/Edit'
 import { Filters } from '@/screens/Containers/Filters/Filters'
 import { useFilters } from '@/screens/Containers/hooks/useFilters'
+import { useTableSort } from '@/screens/Containers/hooks/useTableSort'
 
 export const Containers = () => {
   const [editingId, setEditingId] = useState<number>()
 
   const { filters } = useFilters()
-  const { data, isValidating } = useTableData({ filters })
+  const { handleChange, sort } = useTableSort()
+  const { data, isValidating } = useTableData({ filters, sort })
   const { columns } = useTableColumns({ setEditingId })
   const { rowSelection, selectedRows } = useTableRowSelection()
 
@@ -32,6 +34,7 @@ export const Containers = () => {
           loading={isValidating}
           pagination={false}
           rowSelection={rowSelection}
+          onChange={handleChange}
         />
       </Form.Item>
       <Edit id={editingId} onClose={handleClose} />
