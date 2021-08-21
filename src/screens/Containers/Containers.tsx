@@ -1,4 +1,4 @@
-import { Button, Form, Table } from 'antd'
+import { Form, Table } from 'antd'
 import Head from 'next/head'
 import { useCallback, useState } from 'react'
 import { AuthorizedLayout } from '@/shared/components/AuthorizedLayout'
@@ -6,11 +6,14 @@ import { useTableColumns } from '@/screens/Containers/hooks/useTableColumns'
 import { useTableRowSelection } from '@/screens/Containers/hooks/useTableRowSelection'
 import { useTableData } from '@/screens/Containers/hooks/useTableData'
 import { Edit } from '@/screens/Containers/Edit/Edit'
+import { Filters } from '@/screens/Containers/Filters/Filters'
+import { useFilters } from '@/screens/Containers/hooks/useFilters'
 
 export const Containers = () => {
   const [editingId, setEditingId] = useState<number>()
 
-  const { data, isValidating } = useTableData()
+  const { filters } = useFilters()
+  const { data, isValidating } = useTableData({ filters })
   const { columns } = useTableColumns({ setEditingId })
   const { rowSelection, selectedRows } = useTableRowSelection()
 
@@ -21,11 +24,7 @@ export const Containers = () => {
       <Head>
         <title>Контейнеры</title>
       </Head>
-      <Form.Item>
-        <Button disabled={!selectedRows?.length} size='large' type='primary'>
-          Организовать сбор
-        </Button>
-      </Form.Item>
+      <Filters filters={filters} selectedRows={selectedRows} />
       <Form.Item>
         <Table
           columns={columns}

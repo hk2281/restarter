@@ -1,0 +1,5 @@
+.row :global(.ant-form-item-control-input-content) {
+  display: grid;
+  grid-gap: 24px;
+  grid-template-columns: repeat(4, 1fr);
+}

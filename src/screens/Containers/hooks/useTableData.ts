@@ -1,9 +1,26 @@
-import { useMemo } from 'react'
+import { Dispatch, useMemo } from 'react'
 import useSWR from 'swr'
 import { Container } from '@/screens/Containers/types/container'
+import { api } from '@/api'
 
-export const useTableData = () => {
-  const swrResponse = useSWR<Container[]>(`/containers`)
+export interface FiltersType {
+  building?: number
+  setBuilding: Dispatch<number | undefined>
+  isFull?: boolean
+  setIsFull: Dispatch<boolean | undefined>
+}
+
+interface Params {
+  filters: FiltersType
+}
+
+export const useTableData = ({ filters }: Params) => {
+  const swrResponse = useSWR<Container[]>(
+    [`/containers`, filters.building, filters.isFull],
+    async (url, building, isFull) =>
+      (await api.get(url, { params: { building: building, is_full: isFull } }))
+        .data,
+  )
 
   const data = useMemo(
     () =>

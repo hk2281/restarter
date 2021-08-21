@@ -9,11 +9,16 @@ interface Params {
 
 export const useHandleSubmit = ({ id, onClose }: Params) => {
   const handleSubmit = useCallback(
-    async (values: unknown) => {
+    async ({ is_full, ...values }: Record<string & 'is_full', unknown>) => {
       if (!id) {
         return
       }
-      await api.patch(`/containers/${id}`, values)
+      await Promise.allSettled([
+        is_full
+          ? await api.post(`/full-container-reports`, { container: id })
+          : await api.post(`/containers/${id}/empty`),
+        await api.patch(`/containers/${id}`, values),
+      ])
       await mutate(`/containers`)
       onClose()
     },
