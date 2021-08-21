@@ -29,6 +29,7 @@
 
   :global(.ant-card-body) {
     display: flex;
+    width: calc(100% - 80px);
   }
 
   .button {
