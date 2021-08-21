@@ -4,17 +4,19 @@ import { useBuildings } from '@/shared/hooks/use-buildings'
 import { useContainer } from '@/shared/hooks'
 import { containerStatuses } from '@/config'
 import { useHandleSubmit } from '@/screens/Containers/Edit/hooks/useHandleSubmit'
+import { Container } from '@/screens/Containers/types/container'
 
 interface Props {
   id?: number
   onClose: () => void
+  mutateTableData: () => Promise<Container[] | undefined>
 }
 
-export const Edit = ({ id, onClose }: Props) => {
+export const Edit = ({ id, onClose, mutateTableData }: Props) => {
   const [form] = Form.useForm()
   const { data: container, isValidating } = useContainer({ id })
   const { buildings } = useBuildings()
-  const { handleSubmit } = useHandleSubmit({ id, onClose })
+  const { handleSubmit } = useHandleSubmit({ id, onClose, mutateTableData })
 
   useEffect(() => {
     if (container) {

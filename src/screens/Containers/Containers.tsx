@@ -15,7 +15,7 @@ export const Containers = () => {
 
   const { filters } = useFilters()
   const { handleChange, sort } = useTableSort()
-  const { data, isValidating } = useTableData({ filters, sort })
+  const { data, isValidating, mutate } = useTableData({ filters, sort })
   const { columns } = useTableColumns({ setEditingId })
   const { rowSelection, selectedRows } = useTableRowSelection()
 
@@ -34,10 +34,11 @@ export const Containers = () => {
           loading={isValidating}
           pagination={false}
           rowSelection={rowSelection}
+          style={{ overflowX: `auto` }}
           onChange={handleChange}
         />
       </Form.Item>
-      <Edit id={editingId} onClose={handleClose} />
+      <Edit id={editingId} mutateTableData={mutate} onClose={handleClose} />
     </Form>
   )
 }

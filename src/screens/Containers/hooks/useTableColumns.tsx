@@ -33,7 +33,7 @@ export const useTableColumns = ({ setEditingId }: Params) => {
         sorter: (() => 0) as Sorter,
       },
       {
-        title: `Номер корпуса`,
+        title: `Корпус`,
         dataIndex: `building_part`,
         key: `building_part`,
         render: (buildingPart?: Building['building_part']) =>
