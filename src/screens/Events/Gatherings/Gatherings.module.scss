@@ -1,0 +1,40 @@
+.wrapper {
+  display: grid;
+  grid-gap: 24px;
+}
+
+.title {
+  margin: 0 !important;
+}
+
+.cardBody {
+  display: grid;
+  grid-gap: 12px;
+
+  :global(.ant-typography) {
+    margin: 0;
+  }
+
+  :global(h5.ant-typography) {
+    font-size: 18px;
+  }
+
+  :global(div.ant-typography) {
+    font-size: 16px;
+  }
+}
+
+.card {
+  position: relative;
+
+  :global(.ant-card-body) {
+    display: flex;
+  }
+
+  .button {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    height: calc(100% + 2px);
+  }
+}

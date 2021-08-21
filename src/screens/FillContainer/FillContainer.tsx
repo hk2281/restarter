@@ -40,7 +40,7 @@ export const FillContainer = () => {
             Проверьте данные вашего контейнера
           </Typography.Paragraph>
           <Typography.Title>ID {id}</Typography.Title>
-          <Descriptions bordered>
+          <Descriptions bordered column={1}>
             <Descriptions.Item label='Здание'>
               {container?.building.address}
             </Descriptions.Item>

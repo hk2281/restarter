@@ -9,6 +9,7 @@ export const PATH = {
   RULES: `/rules`,
   ABOUT: `/about`,
   CONTAINERS: `/containers`,
+  EVENTS: `/events`,
   SETTINGS: `/settings`,
   ECO_DEPARTMENT: `/eco`,
 }
