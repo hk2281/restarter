@@ -1,4 +1,4 @@
-import 'antd/dist/antd.css'
+import 'antd/dist/antd.less'
 import { SWRConfig } from 'swr'
 import { AxiosRequestConfig } from 'axios'
 import { ComponentType, ReactNode, useMemo } from 'react'
