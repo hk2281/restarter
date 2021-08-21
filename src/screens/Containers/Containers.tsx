@@ -26,7 +26,11 @@ export const Containers = () => {
       <Head>
         <title>Контейнеры</title>
       </Head>
-      <Filters filters={filters} selectedRows={selectedRows} />
+      <Filters
+        filters={filters}
+        rowSelection={rowSelection}
+        selectedRows={selectedRows}
+      />
       <Form.Item>
         <Table
           columns={columns}
