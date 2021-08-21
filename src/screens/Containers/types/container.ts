@@ -15,7 +15,8 @@ export interface Container {
   is_full: true
   is_public: false
   kind: string
-  location: string
+  room: string
+  description: string
   mass: number
   phone: string
   status: string

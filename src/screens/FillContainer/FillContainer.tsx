@@ -29,8 +29,8 @@ export const FillContainer = () => {
       <Head>
         <title>
           {useMemo(
-            () => [container?.building.address, container?.location].join(`, `),
-            [container?.building.address, container?.location],
+            () => [container?.building.address, container?.room].join(`, `),
+            [container?.building.address, container?.room],
           )}
         </title>
       </Head>
@@ -45,7 +45,7 @@ export const FillContainer = () => {
               {container?.building.address}
             </Descriptions.Item>
             <Descriptions.Item label='Аудитория'>
-              {container?.location}
+              {container?.room}
             </Descriptions.Item>
           </Descriptions>
         </Form.Item>

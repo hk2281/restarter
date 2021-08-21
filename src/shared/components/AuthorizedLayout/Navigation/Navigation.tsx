@@ -14,7 +14,7 @@ export const Navigation = () => {
       className={styles.menu}
       mode='inline'
       selectedKeys={selectedKey ? [selectedKey] : []}
-      style={{ width: 216 }}
+      style={{ width: 196 }}
       onSelect={handleSelect}
     >
       {tabs.map((tab) => (

@@ -20,11 +20,11 @@ export const containerStatuses = [
   },
   {
     value: 2,
-    label: `Активный`,
+    label: `Активен`,
   },
   {
     value: 3,
-    label: `Неактивный`,
+    label: `Неактивен`,
   },
 ]
 

@@ -17,9 +17,9 @@ export const useTableColumns = ({ setEditingId }: Params) => {
         key: `id`,
       },
       {
-        title: `Расположение`,
-        dataIndex: `location`,
-        key: `location`,
+        title: `Аудитория`,
+        dataIndex: `room`,
+        key: `room`,
       },
       {
         title: `Адрес здания`,
@@ -33,13 +33,24 @@ export const useTableColumns = ({ setEditingId }: Params) => {
         key: `floor`,
       },
       {
-        title: `Состояние`,
+        title: `Комментарий`,
+        dataIndex: `description`,
+        key: `description`,
+      },
+      {
+        title: `Активность`,
         dataIndex: `status`,
         key: `status`,
         render: (status: number) =>
           containerStatuses.find(
             (containerStatus) => containerStatus.value === status,
           )?.label,
+      },
+      {
+        title: `Состояние`,
+        dataIndex: `is_full`,
+        key: `is_full`,
+        render: (isFull: boolean) => (isFull ? `Заполнен` : `Не заполнен`),
       },
       {
         key: `edit`,

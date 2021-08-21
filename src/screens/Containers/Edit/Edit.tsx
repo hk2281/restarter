@@ -34,7 +34,7 @@ export const Edit = ({ id, onClose }: Props) => {
       onCancel={onClose}
     >
       <Form form={form} onFinish={handleSubmit}>
-        <Form.Item label='Расположение' name='location'>
+        <Form.Item label='Аудитория' name='room'>
           <Input disabled={isValidating} size='large' />
         </Form.Item>
         <Form.Item label='Здание' name='building'>
