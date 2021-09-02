@@ -1,4 +1,4 @@
-import { AuthorizedLayout } from '@/shared/components/AuthorizedLayout'
+import { authorizedLayoutRenderer } from '@/shared/components/AuthorizedLayout'
 import { Gatherings } from '@/screens/Events/Gatherings/Gatherings'
 import styles from 'src/screens/Events/Events.module.scss'
 
@@ -11,4 +11,4 @@ export const Events = () => {
   )
 }
 
-Events.layout = AuthorizedLayout
+Events.layout = authorizedLayoutRenderer()

@@ -1,7 +1,7 @@
 import { Form, Table } from 'antd'
 import Head from 'next/head'
 import { useCallback, useState } from 'react'
-import { AuthorizedLayout } from '@/shared/components/AuthorizedLayout'
+import { authorizedLayoutRenderer } from '@/shared/components/AuthorizedLayout'
 import { useTableColumns } from '@/screens/Containers/hooks/useTableColumns'
 import { useTableRowSelection } from '@/screens/Containers/hooks/useTableRowSelection'
 import { useTableData } from '@/screens/Containers/hooks/useTableData'
@@ -47,4 +47,5 @@ export const Containers = () => {
   )
 }
 
-Containers.layout = AuthorizedLayout
+// eslint-disable-next-line react/display-name
+Containers.layout = authorizedLayoutRenderer({ wide: true })

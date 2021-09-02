@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { memo, ReactNode } from 'react'
 import { PageHeader } from 'antd'
 import styles from '@/shared/components/AuthorizedLayout/AuthorizedLayout.module.scss'
 import { Navigation } from '@/shared/components/AuthorizedLayout/Navigation/Navigation'
@@ -6,9 +6,11 @@ import { OneAuthorizationStateRoute } from '@/utils/authorization'
 
 interface Props {
   children: ReactNode
+  wide?: boolean
 }
 
-export const AuthorizedLayout = ({ children }: Props) => {
+// eslint-disable-next-line react/display-name
+const AuthorizedLayout = memo(({ children, wide }: Props) => {
   return (
     <>
       <PageHeader
@@ -16,7 +18,7 @@ export const AuthorizedLayout = ({ children }: Props) => {
         ghost={false}
         title='Recycling Starter'
       />
-      <div className={styles.wrapper}>
+      <div className={wide ? styles.wideWrapper : styles.wrapper}>
         <Navigation />
         <OneAuthorizationStateRoute authorized={true}>
           <div className={styles.content}>{children}</div>
@@ -24,4 +26,10 @@ export const AuthorizedLayout = ({ children }: Props) => {
       </div>
     </>
   )
-}
+})
+
+export const authorizedLayoutRenderer = (
+  additionalProps: Partial<Props> = {},
+) =>
+  // eslint-disable-next-line react/display-name
+  memo((props: Props) => <AuthorizedLayout {...props} {...additionalProps} />)

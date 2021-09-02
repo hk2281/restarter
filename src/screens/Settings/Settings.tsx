@@ -1,7 +1,7 @@
 import { Divider } from 'antd'
 import { BellOutlined, UserOutlined } from '@ant-design/icons'
 import useSWR from 'swr'
-import { AuthorizedLayout } from '@/shared/components/AuthorizedLayout'
+import { authorizedLayoutRenderer } from '@/shared/components/AuthorizedLayout'
 import { Password } from '@/screens/Settings/Password/Password'
 import { Profile } from '@/screens/Settings/Profile/Profile'
 import { Notifications } from '@/screens/Settings/Notifications/Notifications'
@@ -24,4 +24,4 @@ export const Settings = () => {
   )
 }
 
-Settings.layout = AuthorizedLayout
+Settings.layout = authorizedLayoutRenderer()

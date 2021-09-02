@@ -5,7 +5,8 @@ module.exports = withLess({
     lessOptions: {
       modifyVars: {
         'primary-color': '#0AC789',
-        'border-radius-base': '2px',
+        'border-radius-base': '16px',
+        'font-family': 'Muller, sans-serif',
       },
     },
   },

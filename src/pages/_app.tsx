@@ -4,9 +4,13 @@ import { AxiosRequestConfig } from 'axios'
 import { ComponentType, ReactNode, useMemo } from 'react'
 import { AuthContext, useAuthorization } from '@/utils/authorization'
 import { api } from '@/api'
+import '@/fonts/Muller/stylesheet.css'
 
 interface AppProps {
-  Component: ComponentType & { layout?: ComponentType }
+  Component: ComponentType & {
+    layout?: ComponentType
+    layoutRenderer?: ComponentType
+  }
   pageProps: Record<string, unknown>
 }
 
