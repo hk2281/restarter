@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { message } from 'antd'
 import { PATH } from '@/config'
 
 export interface Tokens {
@@ -23,6 +24,12 @@ const createResponseInterceptor = () => {
     undefined,
     async (error) => {
       if (error.response.status !== 401) {
+        message.error(
+          JSON.stringify(error.response?.data)
+            .replace(/["}{\[]/g, ``)
+            .replace(/:/g, `: `)
+            .replace(/]/g, ` `) || error.message,
+        )
         return Promise.reject(error)
       }
       api.interceptors.response.eject(interceptor)

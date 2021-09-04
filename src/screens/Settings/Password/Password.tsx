@@ -1,33 +1,25 @@
 import { Button, Form, Input } from 'antd'
 import styles from '@/screens/Settings/Password/Password.module.scss'
+import { useHandleUpdatePassword } from '@/screens/Settings/Password/Password.hooks'
 
 export const Password = () => {
+  const [form] = Form.useForm()
+  const { handleUpdatePassword } = useHandleUpdatePassword({ form })
+
   return (
-    <Form className={styles.form} layout='vertical'>
-      <Form.Item label='Пароль' name='password'>
+    <Form
+      className={styles.form}
+      form={form}
+      layout='vertical'
+      onFinish={handleUpdatePassword}
+    >
+      <Form.Item label='Пароль' name='current_password'>
         <Input.Password size='large' />
       </Form.Item>
-      <Form.Item
-        hasFeedback
-        dependencies={[`password`]}
-        label='Подтвердите пароль'
-        name='current_password'
-        rules={[
-          {
-            required: true,
-            message: `Подтвердите пароль`,
-          },
-          ({ getFieldValue }) => ({
-            validator: (_, value) =>
-              !value || getFieldValue(`password`) === value
-                ? Promise.resolve()
-                : Promise.reject(new Error(`Пароли не совпадают`)),
-          }),
-        ]}
-      >
+      <Form.Item hasFeedback label='Новый пароль' name='new_password'>
         <Input.Password size='large' />
       </Form.Item>
-      <Button block size='large' type='primary'>
+      <Button block size='large' type='primary' onClick={form.submit}>
         Сменить пароль
       </Button>
     </Form>

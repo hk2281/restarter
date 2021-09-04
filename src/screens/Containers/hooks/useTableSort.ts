@@ -23,7 +23,6 @@ export const useTableSort = () => {
         sorterOrderToOrderBy[sorter.order as keyof typeof sorterOrderToOrderBy],
     })
   }, [])
-  console.log(sort)
 
   return { handleChange, sort }
 }

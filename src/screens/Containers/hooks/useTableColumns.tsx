@@ -2,7 +2,6 @@ import { Button } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 import { Dispatch, useMemo } from 'react'
 import { AlignType } from 'rc-table/es/interface'
-import { Building } from '@/screens/Signup/types/building'
 import { containerStatuses } from '@/config'
 
 interface Params {
@@ -29,14 +28,14 @@ export const useTableColumns = ({ setEditingId }: Params) => {
         title: `Адрес здания`,
         dataIndex: `building`,
         key: `building`,
-        render: (building: Building) => building.address,
+        render: (building: Backend.Building) => building.address,
         sorter: (() => 0) as Sorter,
       },
       {
         title: `Корпус`,
         dataIndex: `building_part`,
         key: `building_part`,
-        render: (buildingPart?: Building['building_part']) =>
+        render: (buildingPart?: Backend.BuildingPart) =>
           buildingPart?.num || `–`,
         sorter: (() => 0) as Sorter,
         align: `center` as AlignType,

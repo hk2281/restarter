@@ -7,8 +7,17 @@
   :global(.ant-typography) {
     margin: 0;
   }
+
+  :global(.ant-input) {
+    text-align: center;
+  }
 }
 
 .wide {
   grid-column: 1 / 3;
+}
+
+.select {
+  composes: wide;
+  width: calc(50% - 12px);
 }

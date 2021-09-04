@@ -1,6 +1,7 @@
 import { Button, Form, Input } from 'antd'
 import { useEffect } from 'react'
 import styles from '@/screens/Settings/Profile/Profile.module.scss'
+import { useHandleUpdateEmail } from '@/screens/Settings/Profile/Profile.hooks'
 
 interface Props {
   user?: Backend.Me
@@ -8,6 +9,7 @@ interface Props {
 
 export const Profile = ({ user }: Props) => {
   const [form] = Form.useForm()
+  const { handleUpdateEmail } = useHandleUpdateEmail({ form })
 
   useEffect(() => {
     if (user) {
@@ -21,6 +23,7 @@ export const Profile = ({ user }: Props) => {
       form={form}
       initialValues={user}
       layout='vertical'
+      onFinish={handleUpdateEmail}
     >
       <Form.Item label='Почта' name='new_email'>
         <Input size='large' />
@@ -28,7 +31,7 @@ export const Profile = ({ user }: Props) => {
       <Form.Item label='Пароль' name='current_password'>
         <Input.Password size='large' />
       </Form.Item>
-      <Button block size='large' type='primary'>
+      <Button block size='large' type='primary' onClick={form.submit}>
         Изменить данные
       </Button>
     </Form>
