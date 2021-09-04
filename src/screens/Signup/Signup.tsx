@@ -38,7 +38,7 @@ export const Signup = () => {
             />
           </Form.Item>
           <Form.Item name='password'>
-            <Input.Password />
+            <Input.Password size='large' />
           </Form.Item>
           <Form.Item
             hasFeedback
@@ -57,7 +57,7 @@ export const Signup = () => {
               }),
             ]}
           >
-            <Input.Password />
+            <Input.Password size='large' />
           </Form.Item>
           <Form.Item>
             <Select options={buildings} placeholder='Корпус' size='large' />

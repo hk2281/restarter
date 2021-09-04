@@ -39,7 +39,7 @@ export const Notifications = () => {
         </Form.Item>
       </Typography.Paragraph>
       <Button block size='large' type='primary'>
-        Сменить пароль
+        Сохранить изменения
       </Button>
     </Form>
   )

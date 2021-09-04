@@ -4,6 +4,7 @@ import { UserOutlined } from '@ant-design/icons'
 import { useSubmission } from '@/screens/Login/hooks/useSubmission'
 import { OneAuthorizationStateRoute } from '@/utils/authorization'
 import { UnauthorizedLayout } from '@/shared/components/UnauthorizedLayout'
+import styles from '@/screens/Login/Login.module.scss'
 
 export const Login = () => {
   const { handleSubmit } = useSubmission()
@@ -14,7 +15,7 @@ export const Login = () => {
         <title>Вход</title>
       </Head>
       <OneAuthorizationStateRoute authorized={false}>
-        <Typography.Title>Вход</Typography.Title>
+        <Typography.Title className={styles.title}>Вход</Typography.Title>
         <Form onFinish={handleSubmit}>
           <Form.Item name='email'>
             <Input
