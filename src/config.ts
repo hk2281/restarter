@@ -1,5 +1,7 @@
 export const PATH = {
   HOME: `/`,
+  ADD_CONTAINER: `/add-container`,
+  ADD_CONTAINER_SUCCESS: `/add-container/success`,
   FILL: `/fill`,
   FILL_CONTAINER: `/fill/[container]`,
   FILL_CONTAINER_SUCCESS: `/fill/[container]/success`,

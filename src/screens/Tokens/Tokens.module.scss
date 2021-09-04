@@ -1,0 +1,27 @@
+.wrapper {
+  display: grid;
+  grid-gap: 24px;
+  text-align: center;
+
+  :global(.ant-card-body) {
+    padding: 12px 36px;
+    font-size: 16px;
+    line-height: 16px;
+  }
+
+  :global(.ant-skeleton-element) {
+    display: flex;
+    width: 100%;
+  }
+
+  :global(.ant-skeleton-input) {
+    height: 18px;
+    line-height: 18px;
+    border-radius: 8px;
+  }
+
+  :global(.ant-typography) {
+    display: flex;
+    justify-content: space-between;
+  }
+}

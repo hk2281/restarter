@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { PATH } from '@/config'
 import { UnauthorizedLayout } from '@/shared/components/UnauthorizedLayout'
 
-export const SignupSuccess = () => {
+export const AddContainerSuccess = () => {
   return (
     <>
       <Head>
@@ -21,10 +21,10 @@ export const SignupSuccess = () => {
         ]}
         status='success'
         subTitle='Проверьте вашу почту. Там вы найдете дальнейшую информацию по подключению. Спасибо!'
-        title='Ещё чуть-чуть'
+        title='К вам летит письмо'
       />
     </>
   )
 }
 
-SignupSuccess.layout = UnauthorizedLayout
+AddContainerSuccess.layout = UnauthorizedLayout
