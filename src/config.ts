@@ -11,7 +11,6 @@ export const PATH = {
   CONTAINERS: `/containers`,
   EVENTS: `/events`,
   SETTINGS: `/settings`,
-  ECO_DEPARTMENT: `/eco`,
 }
 
 export const containerStatuses = [
