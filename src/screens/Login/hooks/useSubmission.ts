@@ -1,5 +1,6 @@
 import { useCallback, useContext } from 'react'
 import { message } from 'antd'
+import axios from 'axios'
 import { api, updateTokens } from '@/api'
 import { AuthContext } from '@/utils/authorization'
 
@@ -12,7 +13,11 @@ export const useSubmission = () => {
         setAuthorized(true)
         updateTokens(data)
       } catch (error) {
-        message.error(error.response?.data?.detail || error.message)
+        if (axios.isAxiosError(error)) {
+          message.error(error.response?.data?.detail || error.message)
+        } else {
+          message.error(`Ошибка`)
+        }
       }
     },
     [setAuthorized],
