@@ -1,4 +1,4 @@
-name: restarter
+name: Check project build and run linters
 
 on:
   push:

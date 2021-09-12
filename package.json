@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "stylelint": "npx stylelint \"**/*.scss\" --fix",
-    "eslint": "next lint --fix",
+    "stylelint": "stylelint \"**/*.scss\"",
+    "eslint": "next lint",
     "prepare": "husky install"
   },
   "dependencies": {
