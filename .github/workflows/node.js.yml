@@ -22,7 +22,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install -g yarn
       - run: yarn set version berry
-      - run: yarn install --immutable --immutable-cache
+      - run: yarn install --immutable
       - run: yarn tsc
       - run: yarn eslint
       - run: yarn stylelint
