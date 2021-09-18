@@ -1,15 +1,14 @@
 import { Button, Card, Typography } from 'antd'
 import useSWR from 'swr'
 import moment from 'moment'
-import { Gathering } from '@/screens/Events/Gatherings/types/gathering'
 import styles from 'src/screens/Events/Gatherings/Gatherings.module.scss'
 
-const getStatus = (gathering: Gathering) => {
-  return gathering.id && `неизвестен`
+const getStatus = (gathering: Backend.Gathering) => {
+  return gathering.confirmed_at ? `выполнен` : `надо выполнить`
 }
 
 export const Gatherings = () => {
-  const { data: gatherings } = useSWR<Gathering[]>(
+  const { data: gatherings } = useSWR<Backend.Gathering[]>(
     `/container-takeout-requests`,
   )
 

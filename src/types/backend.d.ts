@@ -27,4 +27,27 @@ declare namespace Backend {
     office_days?: number
     public_days?: number
   }[]
+
+  type Export = {
+    id: number
+    created_at: string
+    building: number
+    mass: number
+    confirmed_at: string
+    confirmed_mass: number
+    wait_time: string
+    fill_time: string
+  }
+
+  type Gathering = {
+    building: number
+    building_part?: number
+    confirmed_at?: string
+    containers: number[]
+    created_at: string
+    emptied_containers: number[]
+    id: number
+    mass: number
+    worker_info: string
+  }
 }
