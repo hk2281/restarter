@@ -6,9 +6,9 @@ interface Params {
 }
 
 export const useTakeoutConditions = ({ building }: Params) => {
-  return useSWR<Backend.TakeoutConditions>(
+  return useSWR<Backend.TakeoutConditions[0]>(
     building ? [`/takeout-conditions`, building] : null,
     async (url, building) =>
-      (await api.get(url, { params: { building } })).data,
+      (await api.get(url, { params: { building } })).data?.[0],
   )
 }

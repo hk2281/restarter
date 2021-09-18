@@ -1,15 +1,18 @@
 import { Button, Form, Input, Select, Typography } from 'antd'
-import { useMemo, useState } from 'react'
-import { takeoutConditions, takeoutConditionTypes } from '@/config'
+import { useEffect, useMemo, useState } from 'react'
 import styles from '@/screens/Settings/Notifications/Notifications.module.scss'
 import { useBuildings } from '@/shared/hooks/use-buildings'
 import { useTakeoutConditions } from '@/screens/Settings/Notifications/hooks/useTakeoutConditions'
+import { useTakeoutConditionSubmit } from '@/screens/Settings/Notifications/hooks/useTakeoutConditionSubmit'
 
 export const Notifications = () => {
   const [building, setBuilding] = useState<number>()
   const [buildingPart, setBuildingPart] = useState<number>()
   const { buildings } = useBuildings()
-  const { data: conditions } = useTakeoutConditions({ building })
+  const { data: conditions, mutate } = useTakeoutConditions({ building })
+  const [form] = Form.useForm()
+  const { handleSubmit } = useTakeoutConditionSubmit(mutate, conditions?.id)
+
   const buildingParts = useMemo(
     () =>
       buildings
@@ -21,8 +24,14 @@ export const Notifications = () => {
     [building, buildings],
   )
 
+  useEffect(() => {
+    if (conditions) {
+      form.setFieldsValue(conditions)
+    }
+  }, [conditions, form])
+
   return (
-    <Form className={styles.form}>
+    <Form className={styles.form} form={form} onFinish={handleSubmit}>
       <Form.Item>
         <Select
           options={buildings}
@@ -47,9 +56,7 @@ export const Notifications = () => {
       {conditions && (!buildingParts?.length || buildingPart) && (
         <>
           <Typography.Paragraph>
-            <Form.Item
-              name={takeoutConditions[takeoutConditionTypes.maxDaysOffice]}
-            >
+            <Form.Item name='office_days'>
               <Input
                 addonAfter='дней в офисе'
                 addonBefore='Не более'
@@ -58,9 +65,7 @@ export const Notifications = () => {
             </Form.Item>
           </Typography.Paragraph>
           <Typography.Paragraph>
-            <Form.Item
-              name={takeoutConditions[takeoutConditionTypes.maxDaysOffice]}
-            >
+            <Form.Item name='public_days'>
               <Input
                 addonAfter='дней в общественном месте'
                 addonBefore='Не более'
@@ -69,9 +74,7 @@ export const Notifications = () => {
             </Form.Item>
           </Typography.Paragraph>
           <Typography.Paragraph className={styles.wide}>
-            <Form.Item
-              name={takeoutConditions[takeoutConditionTypes.maxDaysOffice]}
-            >
+            <Form.Item name='ignore_reports'>
               <Input
                 addonAfter='сообщений о заполненности контейнера в общественном месте'
                 addonBefore='Игнорировать первые'
@@ -80,9 +83,7 @@ export const Notifications = () => {
             </Form.Item>
           </Typography.Paragraph>
           <Typography.Paragraph className={styles.wide}>
-            <Form.Item
-              name={takeoutConditions[takeoutConditionTypes.maxDaysOffice]}
-            >
+            <Form.Item name='mass'>
               <Input
                 addonAfter='кг'
                 addonBefore='Суммарная масса бумаги в корпусе не больше'
@@ -90,7 +91,7 @@ export const Notifications = () => {
               />
             </Form.Item>
           </Typography.Paragraph>
-          <Button block size='large' type='primary'>
+          <Button block size='large' type='primary' onClick={form.submit}>
             Сохранить изменения
           </Button>
         </>

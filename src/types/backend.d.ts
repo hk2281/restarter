@@ -19,10 +19,12 @@ declare namespace Backend {
   }
 
   type TakeoutConditions = {
-    id: number
-    type: number
-    number: number
     building: Pick<Building, 'id', 'address'>
     building_part: BuildingPart
-  }
+    id: number
+    ignore_reports?: number
+    mass?: number
+    office_days?: number
+    public_days?: number
+  }[]
 }
