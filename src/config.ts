@@ -14,6 +14,7 @@ export const PATH = {
   EVENTS: `/events`,
   SETTINGS: `/settings`,
   TOKENS: `/tokens`,
+  STATS: `/stats`,
 }
 
 export const containerStatuses = [
