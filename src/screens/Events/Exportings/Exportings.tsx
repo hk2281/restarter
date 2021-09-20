@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import { Card, Typography } from 'antd'
 import moment from 'moment'
-import styles from '@/screens/Events/exportings/Exportings.module.scss'
+import styles from '@/screens/Events/Exportings/Exportings.module.scss'
 
 const getStatus = (exporting: Backend.Export) => {
   return exporting.confirmed_at ? `завершён` : `необходимо завершить`
