@@ -3,7 +3,7 @@ version: '3.9'
 services:
   next:
     build: .
-    command: sh -c "yarn build && yarn start"
+    command: yarn start
     volumes:
       - next-build:/home/next/build
   nginx:
@@ -14,7 +14,4 @@ services:
     image: nginx:stable-alpine
     entrypoint: nginx -g 'daemon off;'
     ports:
-      - 3000:80
-
-volumes:
-  next-build:
+      - '3000:80'
