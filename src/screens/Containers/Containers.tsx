@@ -1,4 +1,4 @@
-import { Form, Table } from 'antd'
+import { Form, Table, Typography } from 'antd'
 import Head from 'next/head'
 import { useCallback, useState } from 'react'
 import { authorizedLayoutRenderer } from '@/shared/components/AuthorizedLayout'
@@ -26,6 +26,7 @@ export const Containers = () => {
       <Head>
         <title>Контейнеры</title>
       </Head>
+      <Typography.Title level={2}>Контейнеры</Typography.Title>
       <Filters
         filters={filters}
         rowSelection={rowSelection}

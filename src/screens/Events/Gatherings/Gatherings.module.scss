@@ -2,10 +2,21 @@
   display: grid;
   grid-gap: 24px;
   height: fit-content;
+  max-height: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .title {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   margin: 0 !important;
+  background: white;
 }
 
 .cardBody {

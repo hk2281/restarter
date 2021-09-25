@@ -1,4 +1,4 @@
-import { Divider } from 'antd'
+import { Divider, Typography } from 'antd'
 import { BellOutlined, UserOutlined } from '@ant-design/icons'
 import useSWR from 'swr'
 import { authorizedLayoutRenderer } from '@/shared/components/AuthorizedLayout'
@@ -11,6 +11,7 @@ export const Settings = () => {
 
   return (
     <>
+      <Typography.Title level={2}>Контейнеры</Typography.Title>
       <Divider orientation='left'>
         <UserOutlined /> Профиль
       </Divider>

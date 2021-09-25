@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import { Card, Typography } from 'antd'
+import { Button, Card, Typography } from 'antd'
 import moment from 'moment'
 import styles from '@/screens/Events/Exportings/Exportings.module.scss'
 
@@ -14,27 +14,25 @@ export const Exportings = () => {
       <Typography.Title className={styles.title} level={2}>
         Вывозы
       </Typography.Title>
-      {exports
-        ?.slice(-3)
-        .reverse()
-        .map((exporting) => (
-          <Card key={exporting.id} className={styles.card}>
-            <div className={styles.cardBody}>
-              <Typography.Title level={5}>
-                Вывоз №{exporting.id}
-              </Typography.Title>
-              <Typography.Paragraph>
-                Последнее изменение:{` `}
-                {moment(exporting.confirmed_at || exporting.created_at).format(
-                  `DD.MM.YYYY`,
-                )}
-              </Typography.Paragraph>
-              <Typography.Paragraph>
-                Статус: {getStatus(exporting)}
-              </Typography.Paragraph>
-            </div>
-          </Card>
-        ))}
+      <Button block className={styles.button} size='large'>
+        Организовать вывоз
+      </Button>
+      {exports?.reverse().map((exporting) => (
+        <Card key={exporting.id} className={styles.card}>
+          <div className={styles.cardBody}>
+            <Typography.Title level={5}>Вывоз №{exporting.id}</Typography.Title>
+            <Typography.Paragraph>
+              Последнее изменение:{` `}
+              {moment(exporting.confirmed_at || exporting.created_at).format(
+                `DD.MM.YYYY`,
+              )}
+            </Typography.Paragraph>
+            <Typography.Paragraph>
+              Статус: {getStatus(exporting)}
+            </Typography.Paragraph>
+          </div>
+        </Card>
+      ))}
     </div>
   )
 }

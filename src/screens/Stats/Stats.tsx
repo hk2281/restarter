@@ -1,4 +1,4 @@
-import { Checkbox, Form, Button } from 'antd'
+import { Checkbox, Form, Button, Typography } from 'antd'
 import { useCallback, useState } from 'react'
 import { saveAs } from 'file-saver'
 import { authorizedLayoutRenderer } from '@/shared/components/AuthorizedLayout'
@@ -48,6 +48,7 @@ export const Stats = () => {
 
   return (
     <Form layout='vertical'>
+      <Typography.Title level={2}>Контейнеры</Typography.Title>
       <Form.Item>
         <Checkbox checked={checks[0]} onChange={getHandleCheck(0)}>
           Общие данные по объемам
