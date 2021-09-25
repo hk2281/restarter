@@ -6,6 +6,7 @@
   ],
   "rules": {
     "no-descending-specificity": null,
-    "value-keyword-case": null
+    "value-keyword-case": null,
+    "declaration-colon-newline-after": null
   }
 }

@@ -1,3 +1,68 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+
+  :global(.ant-carousel) {
+    margin: 0 -24px;
+
+    :global(.slick-dots) li button {
+      background: #0ac789;
+    }
+  }
+}
+
+.side {
+  margin-bottom: 24px;
+  font-weight: 500;
+  font-size: 18px;
+  text-align: center;
+}
+
 .join {
   margin-top: 8px;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    display: flex;
+    align-items: center;
+    height: calc(100vh - 73px);
+  }
+
+  .wrapper {
+    flex-direction: row;
+    width: 864px;
+    margin: auto;
+    padding: 0;
+
+    &::before {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+      background: url('./assets/hueta.svg') no-repeat 0 100%;
+      background-size: auto calc(100% - 140px);
+      content: '';
+    }
+
+    :global(.ant-carousel) {
+      flex-grow: 1;
+      width: calc(100% - 340px);
+      height: 100%;
+    }
+  }
+
+  .slider {
+    margin-right: 40px;
+  }
+
+  .side {
+    width: 300px;
+    margin-top: 140px;
+    font-size: 20px;
+    text-align: right;
+  }
 }

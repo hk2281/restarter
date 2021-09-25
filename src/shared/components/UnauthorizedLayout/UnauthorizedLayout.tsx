@@ -8,10 +8,11 @@ import { TabsList } from '@/shared/components/UnauthorizedLayout/TabsList/TabsLi
 
 interface Props {
   children: ReactNode
+  ghost?: boolean
 }
 
 export const UnauthorizedLayout = (props: Props) => {
-  const { children } = props
+  const { children, ghost } = props
   const { matches } = useMediaQuery(`(min-width: 1024px)`)
   const [visible, setVisible] = useState(false)
 
@@ -34,9 +35,9 @@ export const UnauthorizedLayout = (props: Props) => {
           onBack={handleOpen}
         />
         {!matches && <Menu handleClose={handleClose} visible={visible} />}
-        <div className={styles.content}>{children}</div>
+        {ghost ? children : <div className={styles.content}>{children}</div>}
       </>
     ),
-    [children, handleClose, handleOpen, matches, visible],
+    [children, ghost, handleClose, handleOpen, matches, visible],
   )
 }

@@ -1,0 +1,62 @@
+.wrapper {
+  margin: 0 24px;
+  padding-bottom: 50px;
+  text-align: center;
+
+  p {
+    margin: 0;
+  }
+}
+
+.imageWrapper {
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #f3ecde;
+  border-radius: 50%;
+}
+
+.imageContent {
+  position: relative;
+  padding: 50%;
+}
+
+.prefix {
+  font-size: 16px;
+}
+
+.value {
+  color: #0ac789;
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 100%;
+}
+
+.postfix {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+@media (min-width: 1024px) {
+  .imageWrapper {
+    margin: 0;
+    padding: 0;
+    background: none;
+  }
+
+  .text {
+    display: grid;
+    grid-gap: 16px;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: end;
+    justify-content: center;
+    margin-top: 24px;
+  }
+
+  .prefix {
+    text-align: right;
+  }
+
+  .postfix {
+    text-align: left;
+  }
+}
