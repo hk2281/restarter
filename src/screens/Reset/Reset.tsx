@@ -1,45 +1,36 @@
 import { Button, Form, Input, Typography } from 'antd'
 import Head from 'next/head'
-import Link from 'next/link'
 import { UserOutlined } from '@ant-design/icons'
-import { useSubmission } from '@/screens/Login/hooks/useSubmission'
+import { useSubmission } from '@/screens/Reset/hooks/useSubmission'
 import { OneAuthorizationStateRoute } from '@/utils/authorization'
 import { UnauthorizedLayout } from '@/shared/components/UnauthorizedLayout'
-import styles from '@/screens/Login/Login.module.scss'
-import { PATH } from '@/config'
+import styles from '@/screens/Reset/Reset.module.scss'
 
-export const Login = () => {
+export const Reset = () => {
   const { handleSubmit } = useSubmission()
 
   return (
     <>
       <Head>
-        <title>Вход</title>
+        <title>Сброс пароля</title>
       </Head>
       <OneAuthorizationStateRoute authorized={false}>
-        <Typography.Title className={styles.title}>Вход</Typography.Title>
+        <Typography.Title className={styles.title}>
+          Сброс пароля
+        </Typography.Title>
         <Form onFinish={handleSubmit}>
           <Form.Item name='email'>
             <Input
+              placeholder='Почта'
               size='large'
               style={{ color: `#00000073` }}
               suffix={<UserOutlined />}
             />
           </Form.Item>
-          <Form.Item name='password'>
-            <Input.Password size='large' />
-          </Form.Item>
           <Form.Item>
             <Button block htmlType='submit' size='large' type='primary'>
-              Войти
+              Сбросить пароль
             </Button>
-          </Form.Item>
-          <Form.Item>
-            <Link passHref href={PATH.RESET}>
-              <Button block size='large'>
-                Забыли пароль
-              </Button>
-            </Link>
           </Form.Item>
         </Form>
       </OneAuthorizationStateRoute>
@@ -47,4 +38,4 @@ export const Login = () => {
   )
 }
 
-Login.layout = UnauthorizedLayout
+Reset.layout = UnauthorizedLayout

@@ -15,6 +15,8 @@ export const PATH = {
   SETTINGS: `/settings`,
   TOKENS: `/tokens`,
   STATS: `/stats`,
+  RESET: `/reset`,
+  RESULT: `/result`,
 }
 
 export const containerStatuses = [
