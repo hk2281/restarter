@@ -77,7 +77,7 @@ export const AddContainer = () => {
           >
             <InputNumber placeholder='Этаж' size='large' />
           </Form.Item>
-          <Form.Item>
+          <Form.Item name='room'>
             <Input placeholder='Аудитория' size='large' />
           </Form.Item>
         </div>
