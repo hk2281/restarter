@@ -12,7 +12,7 @@ export const Menu = ({ visible, handleClose }: Props) => {
     <Drawer
       className={styles.drawer}
       placement='left'
-      title='Recycling Starter'
+      title='Recycle starter'
       visible={visible}
       width='100%'
       onClose={handleClose}

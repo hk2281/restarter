@@ -31,9 +31,9 @@ export const Fill = () => {
       <Head>
         <title>Заполнить контейнер</title>
       </Head>
-      <Typography.Paragraph>
-        Введите идентификационный номер вашего контейнера
-      </Typography.Paragraph>
+      <Typography.Title level={4}>
+        Введите идентификационный номер контейнера, который полностью заполнен
+      </Typography.Title>
       <Form onFinish={handleFinish}>
         <Form.Item name='id'>
           <Input placeholder='1234' size='large' />

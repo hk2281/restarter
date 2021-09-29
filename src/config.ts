@@ -41,11 +41,12 @@ export const containerTypes = [
   },
   {
     value: 2,
-    label: `Офисная урна`,
+    label: `Общественный`,
   },
   {
     value: 3,
-    label: `Коробка из-под бумаги`,
+    label: `Офисная урна`,
+    requiresAuth: true,
   },
 ]
 

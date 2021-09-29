@@ -1,8 +1,10 @@
 import { memo, ReactNode } from 'react'
 import { PageHeader } from 'antd'
+import Link from 'next/link'
 import styles from '@/shared/components/AuthorizedLayout/AuthorizedLayout.module.scss'
 import { Navigation } from '@/shared/components/AuthorizedLayout/Navigation/Navigation'
 import { OneAuthorizationStateRoute } from '@/utils/authorization'
+import { PATH } from '@/config'
 
 interface Props {
   children: ReactNode
@@ -16,7 +18,11 @@ const AuthorizedLayout = memo(({ children, wide }: Props) => {
       <PageHeader
         className={styles.header}
         ghost={false}
-        title='Recycling Starter'
+        title={
+          <Link href={PATH.HOME}>
+            <a className={styles.link}>RecycleStarter</a>
+          </Link>
+        }
       />
       <div className={wide ? styles.wideWrapper : styles.wrapper}>
         <Navigation />

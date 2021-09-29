@@ -15,7 +15,7 @@ export const Home = () => {
   return (
     <>
       <Head>
-        <title>Recycling Starter</title>
+        <title>Recycle starter</title>
       </Head>
       <div className={styles.container}>
         <div className={styles.wrapper}>
@@ -46,12 +46,14 @@ export const Home = () => {
             />
           </Carousel>
           <div className={styles.side}>
-            <Typography.Title>ReCycleStarter</Typography.Title>
+            <Typography.Title>RecycleStarter</Typography.Title>
             <Typography.Paragraph>
               Сервис для раздельного сбора макулатуры
             </Typography.Paragraph>
             <Link passHref href={PATH.FILL}>
-              <Button size='large'>Ввести ID контейнера</Button>
+              <Button size='large' type='primary'>
+                Ввести ID контейнера
+              </Button>
             </Link>
             <Link passHref href={PATH.ADD_CONTAINER}>
               <Button className={styles.join} size='large' type='link'>

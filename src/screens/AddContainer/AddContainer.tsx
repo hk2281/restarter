@@ -1,12 +1,13 @@
 import { Button, Form, Input, InputNumber, Select, Typography } from 'antd'
 import { PhoneOutlined, MailOutlined } from '@ant-design/icons'
 import Head from 'next/head'
-import { useMemo, useState } from 'react'
+import { useContext, useMemo, useState } from 'react'
 import styles from 'src/screens/AddContainer/AddContainer.module.scss'
 import { UnauthorizedLayout } from '@/shared/components/UnauthorizedLayout'
 import { containerTypes } from '@/config'
 import { useBuildings } from '@/shared/hooks/use-buildings'
 import { useHandleSubmit } from '@/screens/AddContainer/hooks/useHandleSubmit'
+import { AuthContext } from '@/utils/authorization'
 
 export const AddContainer = () => {
   const { buildings } = useBuildings()
@@ -14,6 +15,7 @@ export const AddContainer = () => {
   const [building, setBuilding] = useState<number>()
   const [buildingPart, setBuildingPart] = useState<number>()
   const [form] = Form.useForm()
+  const { authorized } = useContext(AuthContext)
 
   const buildingParts = useMemo(
     () =>
@@ -26,6 +28,10 @@ export const AddContainer = () => {
     [building, buildings],
   )
 
+  const options = containerTypes.filter(
+    (containerType) => !containerType.requiresAuth || authorized,
+  )
+
   return (
     <>
       <Head>
@@ -33,7 +39,7 @@ export const AddContainer = () => {
       </Head>
       <Typography.Title>Добавить контейнер</Typography.Title>
       <Typography.Paragraph>
-        Начните ответственный подход к макулатуре с рассказа о себе
+        Начните раздельный сбор макулатуры с рассказа о себе
       </Typography.Paragraph>
       <Form form={form} onFinish={handleAddContainer}>
         <Form.Item name='email'>
@@ -83,7 +89,7 @@ export const AddContainer = () => {
         </div>
         <Form.Item name='kind'>
           <Select
-            options={containerTypes}
+            options={options}
             placeholder='Объем контейнера'
             size='large'
           />

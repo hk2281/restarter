@@ -23,7 +23,11 @@ const createResponseInterceptor = () => {
   const interceptor = api.interceptors.response.use(
     undefined,
     async (error) => {
-      if (error.response.status !== 401) {
+      console.log(error.response)
+      if (
+        error.response.status !== 401 ||
+        error.response.config.url.includes(`/auth/jwt/create`)
+      ) {
         message.error(
           JSON.stringify(error.response?.data)
             .replace(/["}{\[]/g, ``)
