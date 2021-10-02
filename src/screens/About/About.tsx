@@ -1,10 +1,12 @@
 import { Button, List, Typography } from 'antd'
 import Head from 'next/head'
+import Link from 'next/link'
 import { ReactNode } from 'react'
 import useSWR from 'swr'
 import { UnauthorizedLayout } from '@/shared/components/UnauthorizedLayout'
 import styles from '@/screens/About/About.module.scss'
 import { Chart } from '@/screens/About/Chart/Chart'
+import { PATH } from '@/config'
 
 const messagesList = [
   `Корпус по адресу {address} имеет в распоряжении {count} контейнеров.`,
@@ -167,9 +169,11 @@ export const About = () => {
           биологического разнообразия и зелёного покрова нашей планеты.
         </List.Item>
       </List>
-      <Button block className={styles.button} size='large' type='primary'>
-        На главную
-      </Button>
+      <Link passHref href={PATH.HOME}>
+        <Button block className={styles.button} size='large' type='primary'>
+          На главную
+        </Button>
+      </Link>
     </div>
   )
 }
