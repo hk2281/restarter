@@ -1,10 +1,22 @@
 import { Button, List, Typography } from 'antd'
 import Head from 'next/head'
 import { ReactNode } from 'react'
+import useSWR from 'swr'
 import { UnauthorizedLayout } from '@/shared/components/UnauthorizedLayout'
 import styles from '@/screens/About/About.module.scss'
 
+const messagesList = [
+  `Корпус по адресу {address} имеет в распоряжении {count} контейнеров.`,
+  `Корпус по адресу {address}  - {count} контейнеров. К корпусу на улице`,
+  `К корпусу по адресу {address} подключено {count} контейнеров.`,
+  `А в корпусе по адресу {address} сбор макулатуры идёт в {count} контейнерах.`,
+]
+
+const getMessage = (index: number, address: string, count: number) =>
+  messagesList[index]?.replace(`{address}`, address).replace(`{count}`, count)
+
 export const About = () => {
+  const { data: stats } = useSWR<Backend.ContainerStats>(`/container-count`)
   return (
     <div className={styles.wrapper}>
       <Head>
@@ -37,16 +49,11 @@ export const About = () => {
         корпусов нашего университета.
       </Typography.Paragraph>
       <List bordered className={styles.desktopRow}>
-        <List.Item>
-          Корпус на Кронверкском проспекте имеет в распоряжении NN контейнеров.
-        </List.Item>
-        <List.Item>
-          Корпус на улице Ломоносова - NN контейнеров. К корпусу на улице
-        </List.Item>
-        <List.Item>
-          Чайковского подключено NN контейнеров. А в корпусе на переулке
-        </List.Item>
-        <List.Item>Гривцова сбор макулатуры идёт в NN контейнерах.</List.Item>
+        {stats?.map((buildingStats, index) => (
+          <List.Item key={buildingStats.id}>
+            {getMessage(index, buildingStats.building, buildingStats.count)}
+          </List.Item>
+        ))}
       </List>
       <Typography.Title level={3}>
         Совместными усилиями мы собрали уже ТТ тонн макулатуры

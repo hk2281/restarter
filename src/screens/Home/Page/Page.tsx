@@ -4,7 +4,7 @@ import styles from 'src/screens/Home/Page/Page.module.scss'
 interface Props {
   src: StaticImageData
   prefix: string
-  value: number
+  value?: number
   postfix: string
 }
 

@@ -74,4 +74,17 @@ declare namespace Backend {
     mass: number
     worker_info: string
   }
+
+  type Stats = {
+    total_mass: number
+    trees: number
+    energy: number
+    water: number
+  }
+
+  type ContainerStats = {
+    id: number
+    building: string
+    count: number
+  }[]
 }

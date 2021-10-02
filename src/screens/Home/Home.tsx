@@ -2,6 +2,7 @@ import { Button, Carousel, Typography } from 'antd'
 import Link from 'next/link'
 import Head from 'next/head'
 import { ReactNode } from 'react'
+import useSWR from 'swr'
 import { UnauthorizedLayout } from '@/shared/components/UnauthorizedLayout'
 import { PATH } from '@/config'
 import styles from '@/screens/Home/Home.module.scss'
@@ -12,6 +13,7 @@ import Hueta3 from '@/screens/Home/assets/hueta3.svg'
 import Hueta4 from '@/screens/Home/assets/hueta4.svg'
 
 export const Home = () => {
+  const { data: stats } = useSWR<Backend.Stats>(`/collected-mass`)
   return (
     <>
       <Head>
@@ -24,25 +26,25 @@ export const Home = () => {
               postfix='тонн макулатуры'
               prefix='Всего собрано'
               src={Hueta1}
-              value={500}
+              value={stats?.total_mass}
             />
             <Page
               postfix='деревьев'
               prefix='Спасено'
               src={Hueta2}
-              value={500000}
+              value={stats?.trees}
             />
             <Page
               postfix='МВт*ч электроэнергии'
               prefix='Сэкономлено'
               src={Hueta3}
-              value={500}
+              value={stats?.energy}
             />
             <Page
               postfix='кубометров воды'
               prefix='Сохранено'
               src={Hueta4}
-              value={500000}
+              value={stats?.water}
             />
           </Carousel>
           <div className={styles.side}>
