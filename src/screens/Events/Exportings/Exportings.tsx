@@ -14,7 +14,7 @@ export const Exportings = () => {
   const { data: exports } = useSWR<Backend.Export[]>(`/tank-takeout-requests`)
   const [visible, setVisible] = useState(false)
   const { buildings } = useBuildings()
-  const { handleAddExporting } = useHandleAddExporting()
+  const { handleAddExporting } = useHandleAddExporting(setVisible)
   const [form] = Form.useForm()
 
   return (
