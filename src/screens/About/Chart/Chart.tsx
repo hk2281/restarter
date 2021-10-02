@@ -42,9 +42,9 @@ export const Chart = () => {
   const { matches } = useMediaQuery(`(min-width: 1024px)`)
 
   return (
-    <div style={{ height: 400 }}>
+    <div style={{ height: 430 }}>
       <ResponsiveContainer height='100%' width='100%'>
-        <PieChart height={400} width={300}>
+        <PieChart height={500} width={300}>
           <Legend
             align={matches ? `right` : `center`}
             layout='vertical'
