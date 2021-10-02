@@ -6,6 +6,10 @@
   padding: 16px max(calc(50% - 432px), 24px);
   background: #fff;
   border-bottom: 1px solid #f0f0f0;
+
+  :global(.ant-page-header-heading-title) a {
+    color: inherit;
+  }
 }
 
 .link {
