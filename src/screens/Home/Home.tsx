@@ -11,6 +11,7 @@ import Hueta1 from '@/screens/Home/assets/hueta1.svg'
 import Hueta2 from '@/screens/Home/assets/hueta2.svg'
 import Hueta3 from '@/screens/Home/assets/hueta3.svg'
 import Hueta4 from '@/screens/Home/assets/hueta4.svg'
+import { declareNumber } from '@/utils/declareNumber'
 
 export const Home = () => {
   const { data: stats } = useSWR<Backend.Stats>(`/collected-mass`)
@@ -23,18 +24,48 @@ export const Home = () => {
         <div className={styles.wrapper}>
           <Carousel className={styles.slider}>
             <Page
-              prefix='Всего собрано тонн макулатуры'
+              postfix={`${
+                stats?.total_mass &&
+                declareNumber(Math.round(stats?.total_mass), [
+                  `тонна`,
+                  `тонны`,
+                  `тонн`,
+                ])
+              } макулатуры`}
+              prefix={`Всего ${
+                stats?.total_mass &&
+                declareNumber(Math.round(stats?.total_mass), [
+                  `собрана`,
+                  `собраны`,
+                  `собрано`,
+                ])
+              }`}
               src={Hueta1}
-              value={stats?.total_mass}
+              value={stats?.total_mass && Math.round(stats?.total_mass)}
             />
-            <Page prefix='Спасено деревьев' src={Hueta2} value={stats?.trees} />
             <Page
-              prefix='Сэкономлено МВт*ч электроэнергии'
+              postfix={declareNumber(stats?.trees, [
+                `дерево`,
+                `дерева`,
+                `деревьев`,
+              ])}
+              prefix='Спасено'
+              src={Hueta2}
+              value={stats?.trees}
+            />
+            <Page
+              postfix='МВт*ч электроэнергии'
+              prefix='Сэкономлено'
               src={Hueta3}
               value={stats?.energy}
             />
             <Page
-              prefix='Сохранено кубометров воды'
+              postfix={
+                <>
+                  м<sup>3</sup> воды
+                </>
+              }
+              prefix='Сохранено'
               src={Hueta4}
               value={stats?.water}
             />
