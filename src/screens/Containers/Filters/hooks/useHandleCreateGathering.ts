@@ -1,10 +1,9 @@
 import { useCallback } from 'react'
-import { Container } from '@/screens/Containers/types/container'
 import { api } from '@/api'
 
 interface Params {
   rowSelection: { onChange: ([], []) => void }
-  selectedRows?: Container[]
+  selectedRows?: Backend.Container[]
 }
 
 export const useHandleCreateGathering = ({

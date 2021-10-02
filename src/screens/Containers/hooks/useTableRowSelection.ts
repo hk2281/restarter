@@ -1,13 +1,12 @@
 import { Key, useMemo, useState } from 'react'
-import { Container } from '@/screens/Containers/types/container'
 
 export const useTableRowSelection = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>()
-  const [selectedRows, setSelectedRows] = useState<Container[]>()
+  const [selectedRows, setSelectedRows] = useState<Backend.Container[]>()
 
   const rowSelection = useMemo(
     () => ({
-      onChange: (selectedRowKeys: Key[], selectedRows: Container[]) => {
+      onChange: (selectedRowKeys: Key[], selectedRows: Backend.Container[]) => {
         setSelectedRowKeys(selectedRowKeys)
         setSelectedRows(selectedRows)
       },

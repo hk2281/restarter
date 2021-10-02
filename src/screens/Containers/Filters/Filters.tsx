@@ -4,7 +4,6 @@ import { useBuildings } from '@/shared/hooks/use-buildings'
 import styles from 'src/screens/Containers/Filters/Filters.module.scss'
 import { FiltersType } from '@/screens/Containers/hooks/useTableData'
 import { useHandleCreateGathering } from '@/screens/Containers/Filters/hooks/useHandleCreateGathering'
-import { Container } from '@/screens/Containers/types/container'
 
 interface Props {
   filters: FiltersType
@@ -12,8 +11,8 @@ interface Props {
     onChange: ([], []) => void
     selectedRowKeys?: Key[]
   }
-  selectedRows?: Container[]
-  tableData?: Container[]
+  selectedRows?: Backend.Container[]
+  tableData?: Backend.Container[]
 }
 
 const isFullToValue: Record<number, boolean> = { 0: false, 1: true }

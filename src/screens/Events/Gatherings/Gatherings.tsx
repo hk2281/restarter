@@ -2,6 +2,7 @@ import { Card, Typography } from 'antd'
 import useSWR from 'swr'
 import moment from 'moment'
 import { useState } from 'react'
+import classNames from 'classnames'
 import styles from 'src/screens/Events/Gatherings/Gatherings.module.scss'
 import { GatheringModal } from '@/screens/Events/Gatherings/GatheringModal/GatheringModal'
 
@@ -26,7 +27,10 @@ export const Gatherings = () => {
         .map((gathering) => (
           <Card
             key={gathering.id}
-            className={styles.card}
+            className={classNames(
+              styles.card,
+              gathering.confirmed_at && styles.disabled,
+            )}
             onClick={() => setId(gathering.id)}
           >
             <div className={styles.cardBody}>

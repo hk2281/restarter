@@ -1,12 +1,11 @@
 import { useCallback } from 'react'
 import { mutate } from 'swr'
 import { api } from '@/api'
-import { Container } from '@/screens/Containers/types/container'
 
 interface Params {
   id?: number
   onClose: () => void
-  mutateTableData: () => Promise<Container[] | undefined>
+  mutateTableData: () => Promise<Backend.Container[] | undefined>
 }
 
 export const useHandleSubmit = ({ id, onClose, mutateTableData }: Params) => {

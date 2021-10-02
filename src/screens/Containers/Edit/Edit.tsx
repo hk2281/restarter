@@ -4,12 +4,11 @@ import { useBuildings } from '@/shared/hooks/use-buildings'
 import { useContainer } from '@/shared/hooks'
 import { containerStatuses } from '@/config'
 import { useHandleSubmit } from '@/screens/Containers/Edit/hooks/useHandleSubmit'
-import { Container } from '@/screens/Containers/types/container'
 
 interface Props {
   id?: number
   onClose: () => void
-  mutateTableData: () => Promise<Container[] | undefined>
+  mutateTableData: () => Promise<Backend.Container[] | undefined>
 }
 
 export const Edit = ({ id, onClose, mutateTableData }: Props) => {

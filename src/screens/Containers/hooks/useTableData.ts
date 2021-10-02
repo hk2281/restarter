@@ -1,6 +1,5 @@
 import { Dispatch, useMemo } from 'react'
 import useSWR from 'swr'
-import { Container } from '@/screens/Containers/types/container'
 import { api } from '@/api'
 import { Sort } from '@/screens/Containers/hooks/useTableSort'
 
@@ -17,7 +16,7 @@ interface Params {
 }
 
 export const useTableData = ({ filters, sort }: Params) => {
-  const swrResponse = useSWR<Container[]>(
+  const swrResponse = useSWR<Backend.Container[]>(
     [
       `/containers`,
       filters.building,
