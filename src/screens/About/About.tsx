@@ -4,6 +4,7 @@ import { ReactNode } from 'react'
 import useSWR from 'swr'
 import { UnauthorizedLayout } from '@/shared/components/UnauthorizedLayout'
 import styles from '@/screens/About/About.module.scss'
+import { Chart } from '@/screens/About/Chart/Chart'
 
 const messagesList = [
   `Корпус по адресу {address} имеет в распоряжении {count} контейнеров.`,
@@ -13,7 +14,9 @@ const messagesList = [
 ]
 
 const getMessage = (index: number, address: string, count: number) =>
-  messagesList[index]?.replace(`{address}`, address).replace(`{count}`, count)
+  messagesList[index]
+    ?.replace(`{address}`, address)
+    .replace(`{count}`, count.toString())
 
 export const About = () => {
   const { data: stats } = useSWR<Backend.ContainerStats>(`/container-count`)
@@ -57,6 +60,10 @@ export const About = () => {
       </List>
       <Typography.Title level={3}>
         Совместными усилиями мы собрали уже ТТ тонн макулатуры
+      </Typography.Title>
+      <Chart />
+      <Typography.Title level={3}>
+        Почему важен раздельный сбор отходов и ReCycleStarter?
       </Typography.Title>
       <div className={styles.quoteRow}>
         <div>
