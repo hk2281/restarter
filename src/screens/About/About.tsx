@@ -72,10 +72,13 @@ export const About = () => {
           </Typography.Paragraph>
         </div>
         <Typography.Paragraph>
-          <blockquote className={styles.beige}>
-            Аномальная жара и засуха, лесные пожары, обильные осадки и следующие
-            за ними наводнения — всё это признаки изменения климата.
-          </blockquote>
+          <List bordered className={styles.beige}>
+            <List.Item>
+              Аномальная жара и засуха, лесные пожары, обильные осадки
+              и следующие за ними наводнения — всё это признаки изменения
+              климата.
+            </List.Item>
+          </List>
         </Typography.Paragraph>
       </div>
       <Typography.Paragraph>
