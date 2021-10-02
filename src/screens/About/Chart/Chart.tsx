@@ -1,5 +1,6 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts'
 import useSWR from 'swr'
+import { useMediaQuery } from '@/utils/useMediaQuery'
 
 const COLORS = [`#0088FE`, `#00C49F`, `#FFBB28`, `#FF8042`]
 
@@ -38,14 +39,19 @@ const renderCustomizedLabel = ({
 
 export const Chart = () => {
   const { data } = useSWR<Backend.ContainerStats>(`/container-count`)
+  const { matches } = useMediaQuery(`(min-width: 1024px)`)
 
   return (
     <div style={{ height: 400 }}>
       <ResponsiveContainer height='100%' width='100%'>
-        <PieChart height={400} width={400}>
-          <Legend align='right' layout='vertical' verticalAlign='middle' />
+        <PieChart height={400} width={300}>
+          <Legend
+            align={matches ? `right` : `center`}
+            layout='vertical'
+            verticalAlign={matches ? `middle` : `bottom`}
+          />
           <Pie
-            cx='200'
+            cx='50%'
             cy='50%'
             data={data?.map((buildingStats) => ({
               name: buildingStats.building,
@@ -56,7 +62,7 @@ export const Chart = () => {
             isAnimationActive={false}
             label={renderCustomizedLabel}
             labelLine={false}
-            outerRadius={150}
+            outerRadius={matches ? 150 : 125}
           >
             {data?.map((entry, index) => (
               <Cell
