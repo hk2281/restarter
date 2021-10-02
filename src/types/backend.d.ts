@@ -86,5 +86,6 @@ declare namespace Backend {
     id: number
     building: string
     count: number
+    mass: number
   }[]
 }

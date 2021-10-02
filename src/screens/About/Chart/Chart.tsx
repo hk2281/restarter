@@ -55,7 +55,7 @@ export const Chart = () => {
             cy='50%'
             data={data?.map((buildingStats) => ({
               name: buildingStats.building,
-              value: buildingStats.count,
+              value: buildingStats.mass,
             }))}
             dataKey='value'
             fill='#8884d8'

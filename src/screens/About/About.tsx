@@ -19,6 +19,7 @@ const getMessage = (index: number, address: string, count: number) =>
     .replace(`{count}`, count.toString())
 
 export const About = () => {
+  const { data: globalStats } = useSWR<Backend.Stats>(`/collected-mass`)
   const { data: stats } = useSWR<Backend.ContainerStats>(`/container-count`)
   return (
     <div className={styles.wrapper}>
@@ -59,7 +60,8 @@ export const About = () => {
         ))}
       </List>
       <Typography.Title level={3}>
-        Совместными усилиями мы собрали уже ТТ тонн макулатуры
+        Совместными усилиями мы собрали уже {globalStats?.total_mass} тонн
+        макулатуры
       </Typography.Title>
       <Chart />
       <Typography.Title level={3}>
