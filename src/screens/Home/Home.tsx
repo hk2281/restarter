@@ -23,26 +23,18 @@ export const Home = () => {
         <div className={styles.wrapper}>
           <Carousel className={styles.slider}>
             <Page
-              postfix='тонн макулатуры'
-              prefix='Всего собрано'
+              prefix='Всего собрано тонн макулатуры'
               src={Hueta1}
               value={stats?.total_mass}
             />
+            <Page prefix='Спасено деревьев' src={Hueta2} value={stats?.trees} />
             <Page
-              postfix='деревьев'
-              prefix='Спасено'
-              src={Hueta2}
-              value={stats?.trees}
-            />
-            <Page
-              postfix='МВт*ч электроэнергии'
-              prefix='Сэкономлено'
+              prefix='Сэкономлено МВт*ч электроэнергии'
               src={Hueta3}
               value={stats?.energy}
             />
             <Page
-              postfix='кубометров воды'
-              prefix='Сохранено'
+              prefix='Сохранено кубометров воды'
               src={Hueta4}
               value={stats?.water}
             />

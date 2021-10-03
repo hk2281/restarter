@@ -48,7 +48,7 @@ export const Stats = () => {
 
   return (
     <Form layout='vertical'>
-      <Typography.Title level={2}>Контейнеры</Typography.Title>
+      <Typography.Title level={2}>Статистика</Typography.Title>
       <Form.Item>
         <Checkbox checked={checks[0]} onChange={getHandleCheck(0)}>
           Общие данные по объемам

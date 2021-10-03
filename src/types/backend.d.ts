@@ -60,7 +60,7 @@ declare namespace Backend {
     confirmed_at: string
     confirmed_mass: number
     wait_time: string
-    fill_time: string
+    fill_time?: string
   }
 
   type Gathering = {
@@ -73,6 +73,7 @@ declare namespace Backend {
     id: number
     mass: number
     worker_info: string
+    archive_mass?: number
   }
 
   type Stats = {

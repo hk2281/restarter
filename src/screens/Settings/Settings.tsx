@@ -1,5 +1,5 @@
 import { Divider, Typography } from 'antd'
-import { BellOutlined, UserOutlined } from '@ant-design/icons'
+import { BellOutlined, LockOutlined, UserOutlined } from '@ant-design/icons'
 import useSWR from 'swr'
 import { authorizedLayoutRenderer } from '@/shared/components/AuthorizedLayout'
 import { Password } from '@/screens/Settings/Password/Password'
@@ -11,11 +11,14 @@ export const Settings = () => {
 
   return (
     <>
-      <Typography.Title level={2}>Контейнеры</Typography.Title>
+      <Typography.Title level={2}>Настройки</Typography.Title>
       <Divider orientation='left'>
-        <UserOutlined /> Профиль
+        <UserOutlined /> Смена почты
       </Divider>
       <Profile user={user} />
+      <Divider orientation='left'>
+        <LockOutlined /> Смена пароля
+      </Divider>
       <Password />
       <Divider orientation='left'>
         <BellOutlined /> Настройка уведомлений

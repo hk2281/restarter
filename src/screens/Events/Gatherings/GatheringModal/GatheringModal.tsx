@@ -9,6 +9,10 @@ interface Props {
   close: () => void
 }
 
+const getStatus = (gathering?: Backend.Gathering) => {
+  return gathering?.confirmed_at ? `Выполнен` : `Надо выполнить`
+}
+
 export const GatheringModal = ({ id, close }: Props) => {
   const { data: gathering } = useSWR<Backend.Gathering>(
     id ? `/container-takeout-requests/${id}` : null,
@@ -49,7 +53,11 @@ export const GatheringModal = ({ id, close }: Props) => {
             Завершить сбор
           </Button>,
         ]}
-        title={`Сбор №${id}`}
+        title={
+          gathering?.archive_mass === null
+            ? `Сбор №${id}`
+            : `Сбор архива №${id}, ${gathering?.archive_mass} кг`
+        }
         visible={!!id}
         onCancel={close}
       >
@@ -59,33 +67,42 @@ export const GatheringModal = ({ id, close }: Props) => {
               `DD.MM.YYYY`,
             )}
           </Descriptions.Item>
-          <Descriptions.Item label='Статус'>Prepaid</Descriptions.Item>
+          <Descriptions.Item label='Статус'>
+            {getStatus(gathering)}
+          </Descriptions.Item>
         </Descriptions>
-        <Divider />
-        <Table
-          columns={[
-            {
-              dataIndex: `building`,
-              title: `Вынесенные контейнеры`,
-              render: (_building: ['building'], container: Backend.Container) =>
-                [
-                  `ID ${container.id}`,
-                  container?.building?.address,
-                  container.room
-                    ? `аудитория ${container.room}`
-                    : `без аудитории`,
-                ]
-                  .filter((elem) => !!elem)
-                  .join(`, `),
-            },
-          ]}
-          dataSource={gathering?.containers.map((container) => ({
-            key: container.id,
-            ...container,
-          }))}
-          pagination={false}
-          rowSelection={{ onChange: setSelectedRows }}
-        />
+        {!gathering?.archive_mass && (
+          <>
+            <Divider />
+            <Table
+              columns={[
+                {
+                  dataIndex: `building`,
+                  title: `Вынесенные контейнеры`,
+                  render: (
+                    _building: ['building'],
+                    container: Backend.Container,
+                  ) =>
+                    [
+                      `ID ${container.id}`,
+                      container?.building?.address,
+                      container.room
+                        ? `аудитория ${container.room}`
+                        : `без аудитории`,
+                    ]
+                      .filter((elem) => !!elem)
+                      .join(`, `),
+                },
+              ]}
+              dataSource={gathering?.containers.map((container) => ({
+                key: container.id,
+                ...container,
+              }))}
+              pagination={false}
+              rowSelection={{ onChange: setSelectedRows }}
+            />
+          </>
+        )}
         <Divider />
         <Form form={form} onFinish={handleSubmit}>
           <Form.Item

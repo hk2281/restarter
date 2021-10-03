@@ -32,7 +32,7 @@ export const Profile = ({ user }: Props) => {
         <Input.Password size='large' />
       </Form.Item>
       <Button block size='large' type='primary' onClick={form.submit}>
-        Изменить данные
+        Изменить почту
       </Button>
     </Form>
   )

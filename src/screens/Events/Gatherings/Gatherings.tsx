@@ -45,7 +45,11 @@ export const Gatherings = () => {
       </Button>
       {gatherings
         ?.slice()
-        .reverse()
+        .sort(
+          (a, b) =>
+            +!!a.confirmed_at - +!!b.confirmed_at ||
+            +new Date(b.created_at || 0) - +new Date(a.created_at || 0),
+        )
         .map((gathering) => (
           <Card
             key={gathering.id}

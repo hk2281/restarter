@@ -13,7 +13,7 @@ export const Password = () => {
       layout='vertical'
       onFinish={handleUpdatePassword}
     >
-      <Form.Item label='Пароль' name='current_password'>
+      <Form.Item label='Текущий пароль' name='current_password'>
         <Input.Password size='large' />
       </Form.Item>
       <Form.Item hasFeedback label='Новый пароль' name='new_password'>

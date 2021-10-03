@@ -8,17 +8,40 @@ import styles from '@/screens/About/About.module.scss'
 import { Chart } from '@/screens/About/Chart/Chart'
 import { PATH } from '@/config'
 
-const messagesList = [
-  `Корпус по адресу {address} имеет в распоряжении {count} контейнеров.`,
-  `Корпус по адресу {address}  - {count} контейнеров. К корпусу на улице`,
-  `К корпусу по адресу {address} подключено {count} контейнеров.`,
-  `А в корпусе по адресу {address} сбор макулатуры идёт в {count} контейнерах.`,
+const messagesList: ((props: {
+  address: string
+  count: number
+}) => JSX.Element)[] = [
+  ({ address, count }) => (
+    <div>
+      Корпус по адресу {address} имеет в распоряжении контейнеров:{` `}
+      <span className={styles.bold}>{count}</span>
+    </div>
+  ),
+  ({ address, count }) => (
+    <div>
+      Корпус по адресу {address} имеет в распоряжении контейнеров: {` `}
+      <span className={styles.bold}>{count}</span>
+    </div>
+  ),
+  ({ address, count }) => (
+    <div>
+      К корпусу по адресу {address} подключено контейнеров:{` `}
+      <span className={styles.bold}>{count}</span>
+    </div>
+  ),
+  ({ address, count }) => (
+    <div>
+      А в корпусе по адресу {address} имеется контейнеров: {` `}
+      <span className={styles.bold}>{count}</span>
+    </div>
+  ),
 ]
 
-const getMessage = (index: number, address: string, count: number) =>
-  messagesList[index]
-    ?.replace(`{address}`, address)
-    .replace(`{count}`, count.toString())
+const getMessage = (index: number, address: string, count: number) => {
+  const Message = messagesList[index]
+  return <Message address={address} count={count} />
+}
 
 export const About = () => {
   const { data: globalStats } = useSWR<Backend.Stats>(`/collected-mass`)
@@ -62,12 +85,11 @@ export const About = () => {
         ))}
       </List>
       <Typography.Title level={3}>
-        Совместными усилиями мы собрали уже {globalStats?.total_mass} тонн
-        макулатуры
+        Совместными усилиями собрано тонн макулатуры: {globalStats?.total_mass}
       </Typography.Title>
       <Chart />
       <Typography.Title level={3}>
-        Почему важен раздельный сбор отходов и ReCycleStarter?
+        Почему важен раздельный сбор отходов и RecycleStarter?
       </Typography.Title>
       <div className={styles.quoteRow}>
         <div>
@@ -139,8 +161,7 @@ export const About = () => {
           </Typography.Text>
         </List.Item>
         <List.Item>
-          Текущая мощность объектов утилизации (она же переработка) загружена
-          только лишь на 20%.
+          Текущая мощность объектов переработки загружена лишь на 20%.
         </List.Item>
       </List>
       <Typography.Paragraph>

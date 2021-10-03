@@ -21,7 +21,9 @@ export const Menu = ({ visible, handleClose }: Props) => {
         <TabsList onClick={handleClose} />
       </div>
       <Typography.Text>Помощь / Вопросы</Typography.Text>
-      <Typography.Link>mail@support.ru</Typography.Link>
+      <Typography.Link href='mailto:itmo.green@mail.ru'>
+        itmo.green@mail.ru
+      </Typography.Link>
     </Drawer>
   )
 }

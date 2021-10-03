@@ -10,6 +10,10 @@
   :global(.ant-page-header-heading-title) a {
     color: inherit;
   }
+
+  :global(.ant-typography.ant-typography-success) {
+    color: #0ac789;
+  }
 }
 
 .link {
@@ -51,6 +55,10 @@
   :global(.ant-drawer-body) {
     display: flex;
     flex-direction: column;
+  }
+
+  :global(.ant-typography.ant-typography-success) {
+    color: #0ac789;
   }
 }
 

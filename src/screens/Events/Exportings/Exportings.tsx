@@ -2,9 +2,11 @@ import useSWR from 'swr'
 import { Button, Card, Form, Modal, Select, Typography } from 'antd'
 import moment from 'moment'
 import { useState } from 'react'
+import classNames from 'classnames'
 import styles from '@/screens/Events/Exportings/Exportings.module.scss'
 import { useBuildings } from '@/shared/hooks/use-buildings'
 import { useHandleAddExporting } from '@/screens/Events/Exportings/hooks/useHandleAddExporting'
+import { ExportingsModal } from '@/screens/Events/Exportings/ExportingsModal/ExportingsModal'
 
 const getStatus = (exporting: Backend.Export) => {
   return exporting.confirmed_at ? `завершён` : `необходимо завершить`
@@ -16,6 +18,7 @@ export const Exportings = () => {
   const { buildings } = useBuildings()
   const { handleAddExporting } = useHandleAddExporting(setVisible)
   const [form] = Form.useForm()
+  const [id, setId] = useState<number | undefined>()
 
   return (
     <div className={styles.wrapper}>
@@ -32,9 +35,20 @@ export const Exportings = () => {
       </Button>
       {exports
         ?.slice()
-        .reverse()
+        .sort(
+          (a, b) =>
+            +!!a.confirmed_at - +!!b.confirmed_at ||
+            +new Date(b.created_at || 0) - +new Date(a.created_at || 0),
+        )
         .map((exporting) => (
-          <Card key={exporting.id} className={styles.card}>
+          <Card
+            key={exporting.id}
+            className={classNames(
+              styles.card,
+              exporting.confirmed_at && styles.disabled,
+            )}
+            onClick={() => setId(exporting.id)}
+          >
             <div className={styles.cardBody}>
               <Typography.Title level={5}>
                 Вывоз №{exporting.id}
@@ -51,6 +65,7 @@ export const Exportings = () => {
             </div>
           </Card>
         ))}
+      <ExportingsModal close={() => setId(undefined)} id={id} />
       <Modal
         footer={[
           <Button
