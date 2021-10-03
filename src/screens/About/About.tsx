@@ -40,7 +40,7 @@ const messagesList: ((props: {
 
 const getMessage = (index: number, address: string, count: number) => {
   const Message = messagesList[index]
-  return <Message address={address} count={count} />
+  return <Message address={address || `-`} count={count || 0} />
 }
 
 export const About = () => {
@@ -78,7 +78,7 @@ export const About = () => {
         корпусов нашего университета.
       </Typography.Paragraph>
       <List bordered className={styles.desktopRow}>
-        {stats?.map((buildingStats, index) => (
+        {stats?.slice(0, 4).map((buildingStats, index) => (
           <List.Item key={buildingStats.id}>
             {getMessage(index, buildingStats.building, buildingStats.count)}
           </List.Item>
@@ -180,7 +180,7 @@ export const About = () => {
         <List.Item>
           70% образованных отходов отправляются на полигоны для захоронения,
           общая площадь которых в России по самым поверхностным оценкам
-          составляет 40 тысяч км<sup>2</sup>*.
+          составляет 40 тысяч км<sup>2</sup>.
           <Typography.Text className={styles.note} type='secondary'>
             Для сравнения площадь Ленинградской области 84,5 тысяч км
             <sup>2</sup>.
