@@ -54,6 +54,9 @@ export const Edit = ({ id, onClose, mutateTableData }: Props) => {
             size='large'
           />
         </Form.Item>
+        <Form.Item label='Комментарий' name='description'>
+          <Input.TextArea disabled={isValidating} />
+        </Form.Item>
       </Form>
     </Modal>
   )

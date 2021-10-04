@@ -37,7 +37,7 @@ export const FillContainer = () => {
       <Form>
         <Form.Item>
           <Typography.Paragraph>
-            Проверьте данные вашего контейнера
+            Проверьте данные контейнера, который полностью заполнен
           </Typography.Paragraph>
           <Typography.Title>ID {id}</Typography.Title>
           <Descriptions bordered column={1}>
