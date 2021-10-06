@@ -1,11 +1,12 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { Button, Descriptions, Form, Typography } from 'antd'
 import { UnauthorizedLayout } from '@/shared/components/UnauthorizedLayout'
 import { useContainer } from '@/shared/hooks'
 import { useFillContainer } from '@/screens/FillContainer/hooks'
 import { PATH } from '@/config'
+import { api } from '@/api'
 
 export const FillContainer = () => {
   const router = useRouter()
@@ -23,6 +24,12 @@ export const FillContainer = () => {
       query: { container: id },
     })
   }, [fillContainer, id, router])
+
+  useEffect(() => {
+    if (container?.status === 1) {
+      api.post(`/containers/${container?.id}/request-activation`).then()
+    }
+  }, [container?.id, container?.status])
 
   return (
     <>

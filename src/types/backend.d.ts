@@ -31,7 +31,7 @@ declare namespace Backend {
     description: string
     mass: number
     phone: string
-    status: string
+    status: number
   }
 
   interface Building {
