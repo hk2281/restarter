@@ -59,11 +59,12 @@ export const FillContainer = () => {
         <Form.Item>
           <Button
             block
+            disabled={container?.status !== 2}
             size='large'
             type='primary'
             onClick={handleFillContainer}
           >
-            Да, заполнен
+            {container?.status === 2 ? `Да, заполнен` : `Активация запрошена`}
           </Button>
         </Form.Item>
       </Form>

@@ -24,7 +24,7 @@ const renderCustomizedLabel = ({
   const x = cx + radius * Math.cos(-midAngle * RADIAN)
   const y = cy + radius * Math.sin(-midAngle * RADIAN)
 
-  return (
+  return percent ? (
     <text
       dominantBaseline='central'
       fill='white'
@@ -34,7 +34,7 @@ const renderCustomizedLabel = ({
     >
       {`${(percent * 100).toFixed(0)}%`}
     </text>
-  )
+  ) : null
 }
 
 export const Chart = () => {

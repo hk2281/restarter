@@ -7,6 +7,7 @@ import { UnauthorizedLayout } from '@/shared/components/UnauthorizedLayout'
 import styles from '@/screens/About/About.module.scss'
 import { Chart } from '@/screens/About/Chart/Chart'
 import { PATH } from '@/config'
+import { declareNumber } from '@/utils/declareNumber'
 
 const messagesList: ((props: {
   address: string
@@ -14,26 +15,33 @@ const messagesList: ((props: {
 }) => JSX.Element)[] = [
   ({ address, count }) => (
     <div>
-      Корпус по адресу {address} имеет в распоряжении контейнеров:{` `}
+      Корпус по адресу {address} имеет в распоряжении{` `}
       <span className={styles.bold}>{count}</span>
+      {` `}
+      {declareNumber(count, [`контейнер`, `контейнера`, `контейнеров`])}
     </div>
   ),
   ({ address, count }) => (
     <div>
-      Корпус по адресу {address} имеет в распоряжении контейнеров: {` `}
-      <span className={styles.bold}>{count}</span>
+      Корпус по адресу {address} — <span className={styles.bold}>{count}</span>
+      {` `}
+      {declareNumber(count, [`контейнер`, `контейнера`, `контейнеров`])}
     </div>
   ),
   ({ address, count }) => (
     <div>
-      К корпусу по адресу {address} подключено контейнеров:{` `}
+      К корпусу по адресу {address} подключено{` `}
       <span className={styles.bold}>{count}</span>
+      {` `}
+      {declareNumber(count, [`контейнер`, `контейнера`, `контейнеров`])}
     </div>
   ),
   ({ address, count }) => (
     <div>
-      А в корпусе по адресу {address} имеется контейнеров: {` `}
+      А в корпусе по адресу {address} имеется{` `}
       <span className={styles.bold}>{count}</span>
+      {` `}
+      {declareNumber(count, [`контейнер`, `контейнера`, `контейнеров`])}
     </div>
   ),
 ]
@@ -84,8 +92,15 @@ export const About = () => {
           </List.Item>
         ))}
       </List>
-      <Typography.Title level={3}>
-        Совместными усилиями собрано тонн макулатуры: {globalStats?.total_mass}
+      <Typography.Title level={3} style={{ textAlign: `center` }}>
+        Совместными усилиями мы собрали уже {globalStats?.total_mass}
+        {` `}
+        {!!globalStats &&
+          (globalStats.total_mass === Math.round(globalStats.total_mass)
+            ? declareNumber(globalStats.total_mass, [`тонну`, `тонны`, `тонн`])
+            : `тонн`)}
+        {` `}
+        макулатуры
       </Typography.Title>
       <Chart />
       <Typography.Title level={3}>
