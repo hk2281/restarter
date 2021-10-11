@@ -73,10 +73,11 @@ export const About = () => {
         последующей переработки.
       </Typography.Paragraph>
       <Typography.Paragraph>
-        Раздельный сбор отходов – эффективная переработка. Только такая связка
-        работает. И благодаря применению этой технологии в Университете ИТМО мы
-        наглядно увидим, как можем сами влиять на экологическую ситуацию в нашем
-        городе, стране и целом мире.
+        Раздельный сбор отходов + эффективная переработка. Мы уверены, что
+        только так можно достичь результат. Благодаря применению этого подхода в
+        Университете ИТМО мы наглядно объясняем, как можем сами влиять на
+        экологическую ситуацию в нашем городе, стране и целом мире.
+        RecycleStarter покажет, насколько полезны наши совместные действия
       </Typography.Paragraph>
       <Typography.Paragraph>
         ReCycleStarter покажет, насколько полезны наши совместные действия.
@@ -103,6 +104,11 @@ export const About = () => {
         макулатуры
       </Typography.Title>
       <Chart />
+      <Link passHref href={PATH.ADD_CONTAINER}>
+        <Button block className={styles.join} size='large' type='primary'>
+          Присоединиться к сервису
+        </Button>
+      </Link>
       <Typography.Title level={3}>
         Почему важен раздельный сбор отходов и RecycleStarter?
       </Typography.Title>
@@ -216,8 +222,9 @@ export const About = () => {
       </Typography.Title>
       <div className={styles.quoteRowReverse}>
         <List bordered className={styles.beige}>
-          <List.Item>Разделение мусора на фракции</List.Item>
-          <List.Item>Помощь планете с сервисом RecycleStarter</List.Item>
+          <List.Item>
+            Сделать раздельный сбор отходов доступным, удобным и понятным!
+          </List.Item>
         </List>
         <Typography.Paragraph>
           Сейчас с помощью сервиса осуществляется сбор только одной фракции

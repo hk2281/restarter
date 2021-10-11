@@ -22,7 +22,7 @@ export const Home = () => {
       </Head>
       <div className={styles.container}>
         <div className={styles.wrapper}>
-          <Carousel className={styles.slider}>
+          <Carousel autoplay className={styles.slider}>
             <Page
               postfix={`${
                 stats?.total_mass &&

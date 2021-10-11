@@ -37,6 +37,10 @@
   font-weight: bold;
 }
 
+.join {
+  margin: 16px auto;
+}
+
 @media (min-width: 1024px) {
   .wrapper {
     width: 744px;
@@ -53,7 +57,7 @@
   .quoteRowReverse {
     display: grid;
     grid-gap: 24px;
-    grid-template-columns: 8fr 9fr;
+    grid-template-columns: 1fr 2fr;
   }
 
   .desktopRow {
@@ -72,5 +76,11 @@
     display: block;
     width: 256px;
     margin: auto;
+  }
+
+  .join {
+    display: block;
+    width: 256px;
+    margin: -16px auto 48px;
   }
 }
