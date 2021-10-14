@@ -1,12 +1,27 @@
-import { Button, Descriptions, Divider, Form, Input, Modal, Table } from 'antd'
+import {
+  Button,
+  Descriptions,
+  Divider,
+  Form,
+  Input,
+  Modal,
+  Select,
+  Table,
+} from 'antd'
 import useSWR, { mutate } from 'swr'
 import moment from 'moment'
-import { Key, useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { api } from '@/api'
 
 interface Props {
   id?: number
   close: () => void
+}
+
+enum ResultType {
+  successful,
+  unavailable,
+  empty,
 }
 
 const getStatus = (gathering?: Backend.Gathering) => {
@@ -18,27 +33,63 @@ export const GatheringModal = ({ id, close }: Props) => {
     id ? `/container-takeout-requests/${id}` : null,
   )
 
-  const [selectedRows, setSelectedRows] = useState<Key[]>([])
+  const [results, setResults] = useState<{ id: number; value: ResultType }[]>(
+    [],
+  )
   const [form] = Form.useForm()
 
-  const handleSubmit = useCallback(
-    async (values: Record<string, unknown>) => {
-      await api.patch(`/container-takeout-requests/${id}`, {
-        emptied_containers: selectedRows,
-        ...values,
-      })
-      await mutate(`/container-takeout-requests`)
-      close()
+  const getContainerIdByResultType = useCallback(
+    (resultType: ResultType) => {
+      return results
+        .filter((result) => result.value === resultType)
+        .map((result) => result.id)
     },
-    [close, id, selectedRows],
+    [results],
   )
 
+  const handleSubmit = useCallback(async () => {
+    const emptiedContainers = getContainerIdByResultType(ResultType.successful)
+    const unavailableContainers = getContainerIdByResultType(
+      ResultType.unavailable,
+    )
+    const emptyContainers = getContainerIdByResultType(ResultType.empty)
+    await api.patch(`/container-takeout-requests/${id}`, {
+      emptied_containers: emptiedContainers,
+      unavailable_containers: unavailableContainers,
+      already_empty_containers: emptyContainers,
+    })
+    await mutate(`/container-takeout-requests`)
+    close()
+  }, [close, getContainerIdByResultType, id])
+
+  const handleSetResult = useCallback(
+    (id: number, index: number, value: ResultType) => {
+      setResults([
+        ...results.slice(0, index),
+        { id, value },
+        ...results.slice(index + 1),
+      ])
+    },
+    [results],
+  )
+
+  const options = [
+    { value: ResultType.successful, label: `Опустошён` },
+    { value: ResultType.unavailable, label: `Недоступен` },
+    { value: ResultType.empty, label: `Был пуст` },
+  ]
+
   useEffect(() => {
-    if (id) {
-      setSelectedRows([])
+    if (gathering) {
+      setResults(
+        gathering.containers.map(({ id }) => ({
+          id,
+          value: ResultType.successful,
+        })),
+      )
       form.resetFields()
     }
-  }, [form, id])
+  }, [form, gathering])
 
   return (
     <>
@@ -77,21 +128,24 @@ export const GatheringModal = ({ id, close }: Props) => {
             <Table
               columns={[
                 {
-                  dataIndex: `building`,
-                  title: `Вынесенные контейнеры`,
-                  render: (
-                    _building: ['building'],
-                    container: Backend.Container,
-                  ) =>
-                    [
-                      `ID ${container.id}`,
-                      container?.building?.address,
-                      container.room
-                        ? `аудитория ${container.room}`
-                        : `без аудитории`,
-                    ]
-                      .filter((elem) => !!elem)
-                      .join(`, `),
+                  dataIndex: `id`,
+                  title: `ID`,
+                },
+                {
+                  dataIndex: `room`,
+                  title: `Аудитория`,
+                },
+                {
+                  dataIndex: `id`,
+                  title: `Результат`,
+                  render: (id, _record, index) => (
+                    <Select
+                      defaultValue={ResultType.successful}
+                      options={options}
+                      value={results[index]?.value}
+                      onChange={(result) => handleSetResult(id, index, result)}
+                    />
+                  ),
                 },
               ]}
               dataSource={gathering?.containers.map((container) => ({
@@ -99,7 +153,6 @@ export const GatheringModal = ({ id, close }: Props) => {
                 ...container,
               }))}
               pagination={false}
-              rowSelection={{ onChange: setSelectedRows }}
             />
           </>
         )}
