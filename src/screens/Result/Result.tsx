@@ -13,7 +13,7 @@ export const Result = () => {
   return (
     <>
       <Head>
-        <title>Страница не найдена</title>
+        <title>{query.title || query.text || ``}</title>
       </Head>
       <AntResult
         extra={

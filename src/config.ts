@@ -37,7 +37,7 @@ export const containerStatuses = [
 export const containerTypes = [
   {
     value: 1,
-    label: `Экобокс`,
+    label: `Картонный бак Ø45х85 см.`,
   },
   {
     value: 2,
