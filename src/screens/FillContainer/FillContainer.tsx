@@ -5,7 +5,6 @@ import { Button, Descriptions, Form, Typography } from 'antd'
 import { UnauthorizedLayout } from '@/shared/components/UnauthorizedLayout'
 import { useContainer } from '@/shared/hooks'
 import { useFillContainer } from '@/screens/FillContainer/hooks'
-import { PATH } from '@/config'
 import { api } from '@/api'
 
 export const FillContainer = () => {
@@ -19,11 +18,7 @@ export const FillContainer = () => {
 
   const handleFillContainer = useCallback(async () => {
     await fillContainer()
-    await router.push({
-      pathname: PATH.FILL_CONTAINER_SUCCESS,
-      query: { container: id },
-    })
-  }, [fillContainer, id, router])
+  }, [fillContainer])
 
   useEffect(() => {
     if (container?.status === 1) {
