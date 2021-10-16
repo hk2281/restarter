@@ -1,4 +1,4 @@
-import { Drawer, Typography } from 'antd'
+import { Drawer } from 'antd'
 import styles from '@/shared/components/UnauthorizedLayout/UnauthorizedLayout.module.scss'
 import { TabsList } from '@/shared/components/UnauthorizedLayout/TabsList/TabsList'
 
@@ -20,10 +20,6 @@ export const Menu = ({ visible, handleClose }: Props) => {
       <div className={styles.tabs}>
         <TabsList onClick={handleClose} />
       </div>
-      <Typography.Text>Помощь / Вопросы</Typography.Text>
-      <Typography.Link href='mailto:itmo.green@mail.ru'>
-        itmo.green@mail.ru
-      </Typography.Link>
     </Drawer>
   )
 }
