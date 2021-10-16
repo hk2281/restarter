@@ -31,17 +31,6 @@ export const TabsList = (props: Props) => {
             </a>
           </Link>
         ))}
-        <Link passHref href='mailto:itmo.green@mail.ru'>
-          <a>
-            <Typography.Title
-              className={styles.text}
-              level={2}
-              onClick={onClick}
-            >
-              Помощь
-            </Typography.Title>
-          </a>
-        </Link>
       </>
     ),
     [onClick, tab, tabs],

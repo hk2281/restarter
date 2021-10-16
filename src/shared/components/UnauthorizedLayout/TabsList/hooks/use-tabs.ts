@@ -13,6 +13,7 @@ export const useTabs = () => {
       },
       { path: PATH.RULES, title: `Правила сбора` },
       { path: PATH.ABOUT, title: `О нас` },
+      { path: PATH.HELP, title: `Помощь` },
     ],
     [authorized],
   )
