@@ -47,7 +47,7 @@ const createResponseInterceptor = () => {
         return await api(error.response.config)
       } catch (error) {
         clearTokens()
-        window.location.replace(PATH.LOGIN)
+        window.location.replace(PATH.HOME)
         await Promise.reject(error)
       } finally {
         createResponseInterceptor()
