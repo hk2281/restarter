@@ -47,20 +47,26 @@ export const GatheringModal = ({ id, close }: Props) => {
     [results],
   )
 
-  const handleSubmit = useCallback(async () => {
-    const emptiedContainers = getContainerIdByResultType(ResultType.successful)
-    const unavailableContainers = getContainerIdByResultType(
-      ResultType.unavailable,
-    )
-    const emptyContainers = getContainerIdByResultType(ResultType.empty)
-    await api.patch(`/container-takeout-requests/${id}`, {
-      emptied_containers: emptiedContainers,
-      unavailable_containers: unavailableContainers,
-      already_empty_containers: emptyContainers,
-    })
-    await mutate(`/container-takeout-requests`)
-    close()
-  }, [close, getContainerIdByResultType, id])
+  const handleSubmit = useCallback(
+    async (values: Record<string, unknown>) => {
+      const emptiedContainers = getContainerIdByResultType(
+        ResultType.successful,
+      )
+      const unavailableContainers = getContainerIdByResultType(
+        ResultType.unavailable,
+      )
+      const emptyContainers = getContainerIdByResultType(ResultType.empty)
+      await api.patch(`/container-takeout-requests/${id}`, {
+        ...values,
+        emptied_containers: emptiedContainers,
+        unavailable_containers: unavailableContainers,
+        already_empty_containers: emptyContainers,
+      })
+      await mutate(`/container-takeout-requests`)
+      close()
+    },
+    [close, getContainerIdByResultType, id],
+  )
 
   const handleSetResult = useCallback(
     (id: number, index: number, value: ResultType) => {
