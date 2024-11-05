@@ -11,7 +11,7 @@
 }
 
 .header {
-  position: sticky;
+  position: static;
   top: 0;
   z-index: 1;
   height: 73px;
@@ -26,4 +26,25 @@
 
 .link {
   color: inherit !important;
+}
+
+
+
+/* Медиазапрос для экранов шириной до 768px */
+@media (max-width: 768px) {
+  .wrapper, .wideWrapper {
+    max-width: 90vh; /* Устанавливаем ширину контейнера на 100% */
+    padding: 0 16px; /* Уменьшаем боковые отступы */
+
+  }
+
+  .header {
+    padding: 16px 16px; /* Сужаем горизонтальные отступы для header */
+  }
+
+  .content {
+    width: 90vh; /* Делаем контент на всю ширину экрана */
+    padding: 16px; /* Уменьшаем отступы */
+    display: grid;
+  }
 }

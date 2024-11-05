@@ -5,11 +5,17 @@
   max-height: 100%;
   overflow-x: auto;
   scrollbar-width: none;
-
   &::-webkit-scrollbar {
     display: none;
   }
 }
+@media (max-width: 768px) {
+  .wrapper {
+      padding-top: 5vh;
+      overflow-x: unset;
+  }
+}
+
 
 .title {
   position: sticky;
