@@ -1,4 +1,4 @@
-import { Form, Table, Typography, Card, Checkbox, Button } from 'antd'
+import { Form, Table, Typography, Card, Checkbox, Button, Spin } from 'antd'
 import Head from 'next/head'
 import { useCallback, useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
@@ -13,6 +13,7 @@ import { useTableSort } from '@/screens/Containers/hooks/useTableSort'
 import { EditOutlined } from '@ant-design/icons'
 import { containerStatuses } from '@/config'
 import styles from 'src/screens/Containers/style.module.css'
+import useSWR from 'swr'
 
 interface DataDisplayProps {
   data: any
@@ -69,13 +70,31 @@ export const Containers = () => {
   const { data, isValidating, mutate } = useTableData({ filters, sort })
   const { columns } = useTableColumns({ setEditingId })
   const { rowSelection, selectedRows } = useTableRowSelection()
-
+  type ConteinerItem = {
+    building: number
+    building_part?: number
+    confirmed_at?: string
+    containers: number[]
+    created_at: string
+    emptied_containers: number[]
+    id: number
+    mass: number
+    worker_info: string
+    archive_mass?: number
+  };
+  const { data: gatherings, mutate: mutateGatherings } = useSWR<ConteinerItem[]>(
+    `/container-takeout-requests`,
+  );
   const handleClose = useCallback(() => setEditingId(undefined), [])
 
-  useEffect(() => {
-    console.log("Component mounted, data is:", data)
-  }, [data])
+ 
 
+  function getUniqueContainers(items: ConteinerItem[]): number[]{
+      const allContainers = items.flatMap(item => item.containers);
+      return Array.from(new Set(allContainers));
+  }
+  const uniqueContainerIds = getUniqueContainers(gatherings|| []); // Получаем уникальные id
+  
   // Функция для обработки выбора/снятия выбора карточки на мобильной версии
   const handleCardSelect = (id: number, checked: boolean) => {
     const updatedSelectedKeys = checked
@@ -110,21 +129,31 @@ export const Containers = () => {
           !isValidating && data ? (
             <div>
               {data.map(item => (
-                <Card key={item.id} style={{ marginBottom: '16px' }}>
-                  <Checkbox
-                    checked={(rowSelection.selectedRowKeys || []).includes(item.id)}
-                    onChange={e => handleCardSelect(item.id, e.target.checked)}
-                    style={{ marginBottom: '8px' }}
-                  >
-                    Выбрать
-                  </Checkbox>
-                  
-                  <DataDisplay data={item} onEdit={handleEdit}/>
-                </Card>
+                <Card
+                key={item.id}
+                style={{
+                  marginBottom: '16px',
+                  backgroundColor: (rowSelection.selectedRowKeys || []).includes(item.id) ? '#e6fff2' : 'white', // Окрашиваем всю карточку
+                  transition: 'background-color 0.3s' // Плавный переход цвета (опционально)
+                }}>
+                <Checkbox
+                  checked={(rowSelection.selectedRowKeys || []).includes(item.id)}
+                  onChange={e => handleCardSelect(item.id, e.target.checked)}
+                  style={{ marginBottom: '8px' }}
+                  disabled={uniqueContainerIds.includes(item.id)}
+                >
+                  Выбрать
+                </Checkbox>
+                <DataDisplay data={item} onEdit={handleEdit}/>
+              </Card>
               ))}
             </div>
           ) : (
-            <Typography.Text>Загрузка данных...</Typography.Text>
+            <Spin size="large" style={
+              {
+                 display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' 
+              }
+            }/>
           )
         ) : (
           <Table
@@ -132,7 +161,12 @@ export const Containers = () => {
             dataSource={data}
             loading={isValidating}
             pagination={false}
-            rowSelection={rowSelection}
+            rowSelection={{
+              ...rowSelection,
+              getCheckboxProps: record => ({
+                disabled: uniqueContainerIds.includes(record.id) // Некликабельный чекбокс для строк с уникальными id
+              }),
+            }}
             style={{ overflowX: `auto` }}
             onChange={handleChange}
           />

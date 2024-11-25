@@ -18,6 +18,7 @@ export const PATH = {
   RESET: `/reset`,
   RESULT: `/result`,
   HELP: `/help`,
+  BUILDINGS: `/buildings`,
 }
 
 export const containerStatuses = [
