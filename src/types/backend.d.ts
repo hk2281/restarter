@@ -3,8 +3,27 @@ declare namespace Backend {
     id: number
     email: string
     has_eco_group: boolean
+    is_super_user: boolean
   }
 
+  interface Templates{
+    templates: MailTemplate[]
+  }
+  interface MailTemplate {
+    id: string
+    label: string
+    media: string
+    content: string[]
+    description: string
+    mjml_template: string
+  }
+  interface AsignBuildingUser {
+    id: number
+    email: string
+    name: string
+    phone: string
+    building: number[]
+  }
   interface BuildingPart {
     id: number
     num: number
@@ -37,9 +56,28 @@ declare namespace Backend {
   interface Building {
     id: number
     address: string
-    itmo_worker_email: string
-    containers_takeout_email: string
+    itmo_worker_email?: string
+    containers_takeout_email?: string
     building_parts?: BuildingPart[]
+  }
+
+  interface AdminBuilding extends Building {
+    detect_building_part: Boolean | string
+    sticker_giver: string
+    get_container_room: string
+    get_sticker_room: string
+    _takeout_notified: Boolean | string
+    precollected_mass: number
+    passage_scheme:string
+    building_parts?: BuildingPart[]
+
+  }
+
+  interface PagiWraper {
+    count: number
+    next: string
+    previous: string
+    results: any[]
   }
 
   type TakeoutConditions = {

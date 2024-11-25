@@ -4,3 +4,8 @@
   grid-template-columns: 1fr 1fr;
   margin-bottom: 16px;
 }
+@media (max-width: 768px) {
+  .form {
+    grid-template-columns: 1fr; /* Устанавливаем одну колонку на мобильных устройствах */
+  }
+}

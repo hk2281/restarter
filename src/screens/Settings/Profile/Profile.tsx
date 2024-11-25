@@ -2,6 +2,7 @@ import { Button, Form, Input } from 'antd'
 import { useEffect } from 'react'
 import styles from '@/screens/Settings/Profile/Profile.module.scss'
 import { useHandleUpdateEmail } from '@/screens/Settings/Profile/Profile.hooks'
+import { useWindowSize } from '../hooks/useWindowSize'
 
 interface Props {
   user?: Backend.Me
@@ -10,7 +11,9 @@ interface Props {
 export const Profile = ({ user }: Props) => {
   const [form] = Form.useForm()
   const { handleUpdateEmail } = useHandleUpdateEmail({ form })
+  const { width } = useWindowSize();
 
+  const layout = (width !== undefined && width < 768) ? 'horizontal' : 'vertical';
   useEffect(() => {
     if (user) {
       form.setFieldsValue({ new_email: user.email })
@@ -22,7 +25,7 @@ export const Profile = ({ user }: Props) => {
       className={styles.form}
       form={form}
       initialValues={user}
-      layout='vertical'
+      layout={layout}
       onFinish={handleUpdateEmail}
     >
       <Form.Item label='Почта' name='new_email'>

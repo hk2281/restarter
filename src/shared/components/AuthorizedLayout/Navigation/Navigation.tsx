@@ -4,10 +4,15 @@ import styles from '@/shared/components/AuthorizedLayout/Navigation/Navigation.m
 import { tabs } from '@/shared/components/AuthorizedLayout/Navigation/tabs'
 import { useMenu } from '@/shared/components/AuthorizedLayout/Navigation/hooks/use-menu'
 import { CustomDivider } from '@/shared/components/AuthorizedLayout/Navigation/CustomDivider/CustomDivider'
+import useSWR from 'swr'
 
 export const Navigation = () => {
   const { handleSelect, selectedKey } = useMenu()
-
+  const { data: user } = useSWR<Backend.Me>(`/auth/users/me/`)
+  let filtered_tabs = tabs
+  if (!user?.is_super_user){
+    filtered_tabs = filtered_tabs.filter((tab) => (tab.path !== '/buildings'))
+  }
   return (
     <Menu
       className={styles.menu}
@@ -16,7 +21,7 @@ export const Navigation = () => {
       style={{ width: 196 }}
       onSelect={handleSelect}
     >
-      {tabs.map((tab) => (
+      {filtered_tabs.map((tab) => (
         <Menu.Item key={tab.path} className={styles.menuItem}>
           <Link href={tab.path}>
             <a className={styles.link}>{tab.title}</a>
@@ -30,3 +35,5 @@ export const Navigation = () => {
     </Menu>
   )
 }
+
+export default Navigation

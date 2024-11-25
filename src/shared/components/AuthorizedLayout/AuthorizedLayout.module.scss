@@ -1,6 +1,6 @@
 .wrapper {
   display: flex;
-  max-width: 1024px;
+  max-width: 75%;
   height: calc(100vh - 73px);
   margin: auto;
 }
@@ -11,7 +11,7 @@
 }
 
 .header {
-  position: sticky;
+  position: static;
   top: 0;
   z-index: 1;
   height: 73px;
@@ -26,4 +26,35 @@
 
 .link {
   color: inherit !important;
+}
+
+
+
+/* Адаптация для экранов шириной до 992px (планшеты) */
+@media (max-width: 1100px) {
+  .wrapper {
+    display: flex;
+    max-width: 100%;
+    height: calc(100vh - 73px);
+    margin: auto;
+  }
+}
+
+/* Медиазапрос для экранов шириной до 768px */
+@media (max-width: 768px) {
+  .wrapper, .wideWrapper {
+    max-width: 90vh; /* Устанавливаем ширину контейнера на 100% */
+    padding: 0 16px; /* Уменьшаем боковые отступы */
+
+  }
+
+  .header {
+    padding: 16px 16px; /* Сужаем горизонтальные отступы для header */
+  }
+
+  .content {
+    width: 90vh; /* Делаем контент на всю ширину экрана */
+    padding: 16px; /* Уменьшаем отступы */
+    display: grid;
+  }
 }

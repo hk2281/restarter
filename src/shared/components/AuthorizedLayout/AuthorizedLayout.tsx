@@ -2,9 +2,15 @@ import { memo, ReactNode } from 'react'
 import { PageHeader } from 'antd'
 import Link from 'next/link'
 import styles from '@/shared/components/AuthorizedLayout/AuthorizedLayout.module.scss'
-import { Navigation } from '@/shared/components/AuthorizedLayout/Navigation/Navigation'
+// import { Navigation } from '@/shared/components/AuthorizedLayout/Navigation/Navigation'
 import { OneAuthorizationStateRoute } from '@/utils/authorization'
 import { PATH } from '@/config'
+import dynamic from 'next/dynamic';
+
+const Navigation = dynamic(
+  () => import('@/shared/components/AuthorizedLayout/Navigation/Navigation'),
+  { ssr: false }
+);
 
 interface Props {
   children: ReactNode

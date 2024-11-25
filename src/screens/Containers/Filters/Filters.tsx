@@ -35,7 +35,6 @@ export const Filters = (props: Props) => {
       >
         Организовать сбор
       </Button>
-      <br />
       <Select
         allowClear
         options={buildings}
