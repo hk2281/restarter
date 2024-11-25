@@ -38,7 +38,7 @@ export const Notifications = () => {
           placeholder='Выберите здание'
           size='large'
           value={building}
-          onChange={setBuilding}
+          onChange={(value) => setBuilding(Number(value))}
         />
       </Form.Item>
       <Form.Item>
@@ -48,7 +48,7 @@ export const Notifications = () => {
             placeholder='Выберите корпус'
             size='large'
             value={buildingPart}
-            onChange={setBuildingPart}
+            onChange={(value) => setBuildingPart(Number(value))}
           />
         )}
       </Form.Item>
