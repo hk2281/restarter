@@ -13,17 +13,26 @@ interface Props {
   }
   selectedRows?: Backend.Container[]
   tableData?: Backend.Container[]
+  onGatheringOrganized?: () => void
 }
 
 const isFullToValue: Record<number, boolean> = { 0: false, 1: true }
 
 export const Filters = (props: Props) => {
-  const { filters, rowSelection, selectedRows } = props
+  const { filters, rowSelection, selectedRows, onGatheringOrganized} = props
   const { buildings } = useBuildings()
   const { handleCreateGathering } = useHandleCreateGathering({
     rowSelection,
     selectedRows,
   })
+
+  const handleClick = async () => {
+    await handleCreateGathering() // Выполняем логику сборки
+    if (onGatheringOrganized) {
+      console.log('hi gem')
+      onGatheringOrganized() // Вызываем переданную функцию
+    }
+  }
 
   return (
     <Form.Item className={styles.row}>
@@ -31,7 +40,7 @@ export const Filters = (props: Props) => {
         disabled={!rowSelection.selectedRowKeys?.length}
         size='large'
         type='primary'
-        onClick={handleCreateGathering}
+        onClick={handleClick}
       >
         Организовать сбор
       </Button>

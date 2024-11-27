@@ -89,12 +89,14 @@ export const Containers = () => {
 
  
 
-  function getUniqueContainers(items: ConteinerItem[]): number[]{
-      const allContainers = items.flatMap(item => item.containers);
-      return Array.from(new Set(allContainers));
-  }
-  const uniqueContainerIds = getUniqueContainers(gatherings|| []); // Получаем уникальные id
-  
+  function getUniqueContainers(items: ConteinerItem[]): number[] {
+    const allContainers = items
+        .filter(item => item.confirmed_at === null) // Учитываем только элементы с confirmed_at: null
+        .flatMap(item => item.containers); // Извлекаем массивы контейнеров
+
+    return Array.from(new Set(allContainers)); // Возвращаем уникальные контейнеры
+}
+  let uniqueContainerIds = getUniqueContainers(gatherings|| []); // Получаем уникальные id
   // Функция для обработки выбора/снятия выбора карточки на мобильной версии
   const handleCardSelect = (id: number, checked: boolean) => {
     const updatedSelectedKeys = checked
@@ -107,11 +109,21 @@ export const Containers = () => {
       : (selectedRows || []).filter(row => row.id !== id);
 
     rowSelection.onChange(updatedSelectedKeys, updatedSelectedRows);
+
 };
   // Функция для открытия редактора
   const handleEdit = (id: number) => {
     setEditingId(id)
   }
+
+    // Коллбэк, который будет вызываться из Filters
+    const handleGatheringOrganized = async () => {
+      console.log('Событие отработало в родительском компоненте')
+      await mutate() // Обновляем данные таблицы
+      await mutateGatherings()
+      uniqueContainerIds = getUniqueContainers(gatherings|| []);
+      
+    }
 
   return (
     <Form>
@@ -123,6 +135,7 @@ export const Containers = () => {
         filters={filters}
         rowSelection={rowSelection}
         selectedRows={selectedRows}
+        onGatheringOrganized={handleGatheringOrganized}
       />
       <Form.Item>
         {isMobile ? (
