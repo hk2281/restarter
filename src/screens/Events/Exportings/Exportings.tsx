@@ -1,7 +1,7 @@
 import useSWR from 'swr'
-import { Button, Card, Form, Modal, Select, Typography } from 'antd'
+import { Button, Card, Form, Modal, Select, Typography, notification } from 'antd'
 import moment from 'moment'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import styles from '@/screens/Events/Exportings/Exportings.module.scss'
 import { useBuildings } from '@/shared/hooks/use-buildings'
@@ -20,6 +20,27 @@ export const Exportings = () => {
   const [form] = Form.useForm()
   const [id, setId] = useState<number | undefined>()
 
+  const handleButtonClick = () => {
+    const lastClickTime = localStorage.getItem('exportings_last_click_time')
+    const now = Date.now()
+
+    if (lastClickTime) {
+      const elapsed = now - parseInt(lastClickTime, 10)
+      if (elapsed < 30000) {
+        const remainingTime = Math.ceil((30000 - elapsed) / 1000)
+        notification.info({
+          message: 'Действие заблокировано',
+          description: `Подождите ${remainingTime} секунд перед следующим действием.`,
+        })
+        return
+      }
+    }
+
+    // Действие разрешено
+    localStorage.setItem('exportings_last_click_time', now.toString())
+    setVisible(true)
+  }
+
   return (
     <div className={styles.wrapper}>
       <Typography.Title className={styles.title} level={2}>
@@ -28,8 +49,8 @@ export const Exportings = () => {
       <Button
         block
         className={styles.button}
-        size='large'
-        onClick={() => setVisible(true)}
+        size="large"
+        onClick={handleButtonClick}
       >
         Организовать вывоз
       </Button>
@@ -69,24 +90,24 @@ export const Exportings = () => {
       <Modal
         footer={[
           <Button
-            key='create'
-            size='large'
-            type='primary'
+            key="create"
+            size="large"
+            type="primary"
             onClick={form.submit}
           >
             Создать
           </Button>,
         ]}
-        title='Создать вызов'
+        title="Создать вызов"
         visible={visible}
         onCancel={() => setVisible(false)}
       >
         <Form className={styles.form} form={form} onFinish={handleAddExporting}>
-          <Form.Item name='building'>
+          <Form.Item name="building">
             <Select
               options={buildings}
-              placeholder='Выберите здание'
-              size='large'
+              placeholder="Выберите здание"
+              size="large"
             />
           </Form.Item>
         </Form>
